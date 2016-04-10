@@ -2,10 +2,9 @@
   "name": "character-creator",
   "version": "1.0.0",
   "description": "Character Creator for AEPi Booth 2016",
-  "main": "js/app.jsx",
+  "main": "main.js",
   "scripts": {
-    "build": "./node_modules/webpack/bin/webpack.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron main.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +30,7 @@
     "webpack": "^1.12.14"
   },
   "dependencies": {
+    "electron-prebuilt": "^0.36.10",
     "css-loader": "^0.23.1",
     "less": "^2.6.1",
     "less-loader": "^2.2.3",
