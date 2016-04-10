@@ -33,6 +33,7 @@ module.exports = {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
       },
+      { test: /\.(ttf|otf|png)$/, loader: 'url-loader?limit=100000' },
       {
         test: /\.less$/,
         loader: 'style!css!postcss!less',

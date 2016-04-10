@@ -124,7 +124,7 @@ class StartScreen extends React.Component {
     return (
       <div onClick={this.props.advanceScreen}>
         <div className='pretitle'>𝛢𝛦𝛱 Presents:</div>
-        <img className='logo' src='/static/img/dnd_logo_transparent.png'/>
+        <img className='logo' src='static/img/dnd_logo_transparent.png'/>
         <div className='subtitle'>Exile from Morewood</div>
         <div className='cta pulsate'>tap card to begin</div>
       </div>
