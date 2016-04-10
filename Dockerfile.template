@@ -19,9 +19,9 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 
 RUN mkdir -p /usr/src/app && ln -s /usr/src/app /app
 COPY package.json /usr/src/app/package.json
-RUN webpack
 WORKDIR /usr/src/app
 RUN JOBS=MAX npm install --unsafe-perm
+RUN ./node_modules/webpack/bin/webpack.js
 
 COPY . /usr/src/app
 
