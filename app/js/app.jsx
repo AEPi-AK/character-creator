@@ -75,10 +75,10 @@ class StatsScreen extends React.Component {
 
   rollAll() {
     this.cubes.map((name, i) => {
-      setTimeout(() => this.refs['cube' + i].roll(), 1000 * i)
+      setTimeout(() => this.refs['cube' + i].roll(), 1500 * i)
     })
     this.setState({rolled: true, rolling: true});
-    setTimeout(() => this.setState({rolling: false}), 1250 * this.cubes.length)
+    setTimeout(() => this.setState({rolling: false}), 1500 * this.cubes.length)
   }
 
   onClick() {
@@ -123,7 +123,7 @@ class StartScreen extends React.Component {
   render() {
     return (
       <div onClick={this.props.advanceScreen}>
-        <div className='pretitle'>𝛢𝛦𝛱 Presents:</div>
+        <div className='pretitle'>&Alpha;&Epsilon;&Pi; Presents:</div>
         <img className='logo' src='static/img/dnd_logo_transparent.png'/>
         <div className='subtitle'>Exile from Morewood</div>
         <div className='cta pulsate'>tap card to begin</div>
