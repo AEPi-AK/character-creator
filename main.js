@@ -18,7 +18,7 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  let height = 480;
+  var height = 480;
   if (process.platform == 'darwin') {
     height += 23;
   }
