@@ -21,9 +21,9 @@ RUN mkdir -p /usr/src/app && ln -s /usr/src/app /app
 COPY package.json /usr/src/app/package.json
 WORKDIR /usr/src/app
 RUN JOBS=MAX npm install --unsafe-perm
-RUN ./node_modules/webpack/bin/webpack.js
 
 COPY . /usr/src/app
+RUN ./node_modules/webpack/bin/webpack.js
 
 # CMD ["xinit", "/usr/src/app/launch_app.sh", "--kiosk", "--", "-nocursor"]
 CMD ["xinit", "/usr/src/app/launch_app.sh", "--kiosk", "--"]
