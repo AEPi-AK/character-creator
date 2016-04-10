@@ -151,17 +151,66 @@ class ScanScreen extends React.Component {
 
 }
 
+class CreateScreen extends React.Component {
+  render() {
+      return (
+        <div>
+          <div className='create-title'>As you journey through <span>Exile from Morewood</span>, <br />our booth will save your skills and experience.</div>
+          <div className='create-button' onClick={this.props.advanceScreen}>
+            <img src='static/img/new.svg'></img>
+            <div>Create Character</div>
+          </div>
+          <div className='create-random-button' onClick={this.props.advanceScreen}>
+            <img src='static/img/shuffle.svg'></img>
+            <div>randomize</div>
+          </div>
+        </div>
+      )
+    }
+}
+
+class RaceScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.races = ['Human', 'Dwarf', 'Elf'];
+    this.state = {
+      race: null,
+    }
+  }
+
+  render() {
+      const races = this.races.map((name, i) => {
+        return (
+          <div className='race-block' onClick={this.props.updateRace.bind(this, name)}>
+            <img src={`static/img/${name}.png`}/>
+            <div>{name}</div>
+          </div>
+        )
+      })
+      return (
+        <div className='race-container'>
+          <div className='race-title'>Choose a Race</div>
+          {races}
+        </div>
+      )
+    }
+}
+
 class Main extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      screen: 0,
+      screen: 3,
+      race: 'butts',
     }
 
     this.screens = [
       StartScreen,
       ScanScreen,
+      CreateScreen,
+      RaceScreen,
       StatsScreen,
     ]
   }
@@ -170,10 +219,15 @@ class Main extends React.Component {
     this.setState({screen: this.state.screen + 1})
   }
 
+  updateRace(newRace) {
+    this.setState({screen: this.state.screen + 1, race:newRace})
+  }
+
   render() {
     const screens = this.screens.map(screen => {
       const Screen = React.createFactory(screen);
-      return Screen({advanceScreen: this.advanceScreen.bind(this)})
+      return Screen({advanceScreen: this.advanceScreen.bind(this),
+        updateRace:this.updateRace.bind(this)})
     })
     return (
       <div className='container'>
