@@ -1,0 +1,78 @@
+@bg: #161616;
+@yellow: #D1B125;
+@red: #D91E01;
+
+@font-face {
+  font-family: 'Fell';
+  src: url('/static/font/fell.otf');
+}
+
+@font-face {
+  font-family: 'Fell Italic';
+  src: url('/static/font/fell_it.otf');
+}
+
+@font-face {
+  font-family: 'Fell SC';
+  src: url('/static/font/fell_sc.ttf');
+}
+
+body {
+  background-color: @bg;
+  color: @yellow;
+  margin: 0;
+}
+
+.container {
+  border: 1px solid white;
+  width: 800px;
+  height: 480px;
+  text-align: center;
+
+  img.logo {
+    height: 180px;
+    margin-top: -10px;
+  }
+
+  .pretitle {
+    margin-top: 40px;
+    font-family: 'Fell';
+    font-size: 50px;
+    margin-left: -300px;
+  }
+
+  .subtitle {
+    font-family: 'Fell Italic';
+    font-size: 55px;
+    margin-left: 120px;
+    margin-top: -20px;
+  }
+
+  .cta {
+    font-family: 'Fell SC';
+    font-size: 70px;
+    color: @red;
+    margin-top: 30px;
+  }
+
+  .pulsate {
+    animation: pulsate 2s ease-in-out;
+    animation-iteration-count: infinite;
+    opacity: 0.5;
+  }
+
+  @-webkit-keyframes pulsate {
+    0% {
+      opacity: 0.85;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1.0;
+      transform: scale(1.15);
+    }
+    100% {
+      opacity: 0.85;
+      transform: scale(1);
+    }
+  }
+}

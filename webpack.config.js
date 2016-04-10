@@ -1,12 +1,21 @@
 var path = require('path');
 var webpack = require('webpack');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: './index.jsx',
+  entry: './js/app.jsx',
+	context: path.join(__dirname, 'app'),
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: './static/', to: 'static/' },
+      { from: './index.html' },
+    ])
+  ],
   devtool: 'cheap-module-source-map',
   output: {
+    path: path.join(__dirname, 'build'),
     filename: 'app.js',
-    sourceMapFilename: 'index.js.map',
+    sourceMapFilename: 'app.js.map',
   },
   response: './',
   module: {
@@ -17,8 +26,11 @@ module.exports = {
         exclude: /node_modules/,
         query: {
           presets: ['es2015', 'react'],
-          plugins: ['syntax-decorators'],
         }
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       },
       {
         test: /\.less$/,
