@@ -126,19 +126,25 @@ class StartScreen extends React.Component {
         <div className='pretitle'>&Alpha;&Epsilon;&Pi; Presents:</div>
         <img className='logo' src='static/img/dnd_logo_transparent.png'/>
         <div className='subtitle'>Exile from Morewood</div>
-        <div className='cta pulsate'>tap card to begin</div>
+        <div className='cta pulsate'>tap to begin</div>
       </div>
     )
   }
 
 }
 
-class SecondScreen extends React.Component {
+class ScanScreen extends React.Component {
 
   render() {
     return (
       <div onClick={this.props.advanceScreen}>
-        {'Hi mom!'}
+        <div className='scan-title'>Welcome, brave adventurer!</div>
+        <div className='scan-cta'>scan card to continue</div>
+        <div className='scan-card-container'>
+          <img className='scan-card' src='static/img/id_pitt.png'/>
+          <img className='scan-card' src='static/img/id_cmu.png'/>
+          <div className='scan-help'>If you do not have a Student ID, ask a booth attendant and we will provide you with a scannable card.</div>
+        </div>
       </div>
     )
   }
@@ -155,6 +161,7 @@ class Main extends React.Component {
 
     this.screens = [
       StartScreen,
+      ScanScreen,
       StatsScreen,
     ]
   }
