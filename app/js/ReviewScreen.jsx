@@ -8,7 +8,7 @@ import '../less/ReviewScreen.less'
 
 // Milliseconds before the character creator will return to the home screen.
 const RESTART_TIMER = 30000
-const API_BASE = 'http://localhost:8000' || 'http://api.ExileFromMorewood.com'
+const API_BASE = 'http://api.ExileFromMorewood.com'
 
 class ReviewScreen extends React.Component {
 
