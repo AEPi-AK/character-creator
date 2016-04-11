@@ -202,8 +202,8 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      screen: 3,
-      race: 'butts',
+      screen: 0,
+      race: null,
     }
 
     this.screens = [
