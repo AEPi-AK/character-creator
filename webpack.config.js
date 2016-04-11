@@ -4,7 +4,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 
 module.exports = {
-  entry: './js/app.jsx',
+  entry: './js/Main.jsx',
 	context: path.join(__dirname, 'app'),
   plugins: [
     new CopyWebpackPlugin([

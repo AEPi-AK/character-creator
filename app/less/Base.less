@@ -1,0 +1,57 @@
+@bg: #161616;
+@yellow: #D1B125;
+@red: #D91E01;
+@bg-card: #3B3B3B;
+
+@font-face {
+  font-family: 'Fell';
+  src: url('../static/font/fell.otf');
+}
+
+@font-face {
+  font-family: 'Fell Italic';
+  src: url('../static/font/fell_it.otf');
+}
+
+@font-face {
+  font-family: 'Fell SC';
+  src: url('../static/font/fell_sc.ttf');
+}
+
+.pulsate {
+  animation: pulsate 2s ease-in-out;
+  animation-iteration-count: infinite;
+  opacity: 0.5;
+}
+
+@-webkit-keyframes pulsate {
+  0% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1.0;
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+}
+
+.title {
+  margin-top: 20px;
+  font-size: 70px;
+}
+
+.card {
+  background: @bg-card;
+  border-radius: 24px;
+  border-style: solid;
+  border-color: @yellow;
+  margin-right: 15px;
+  margin-top: 18px;
+  box-shadow: 0 6px 8px 0 black;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  float: left;
+}
