@@ -2,7 +2,7 @@ import React from 'react'
 import Spinner from 'react-spinkit'
 import 'whatwg-fetch'
 
-import { STATS } from './Game.jsx'
+import { STATS, MAX_LEVEL } from './Game.jsx'
 
 import '../less/ReviewScreen.less'
 
@@ -16,7 +16,6 @@ class ReviewScreen extends React.Component {
     super(props);
     this.state = {
       loaded: false,
-      secondsUntilRestart: RESTART_TIMER / 1000
     }
     this.createCharacter();
   }
@@ -34,18 +33,8 @@ class ReviewScreen extends React.Component {
     .then(response => {
       this.props.character.num = response.num
       this.props.setCharacter(this.props.character)
-      this.setState({loaded: true, tsLoaded: Date.now()})
-      setTimeout(() => {
-        this.props.restart()
-      }, RESTART_TIMER)
-      const intervalTimer = setInterval(() => {
-        this.setState({
-          secondsUntilRestart: Math.round((RESTART_TIMER - (Date.now() - this.state.tsLoaded)) / 1000)
-        })
-        if (this.state.secondsUntilRestart <= 0) {
-          clearInterval(intervalTimer)
-        }
-      }, 250)
+      this.setState({loaded: true})
+      setTimeout(() => this.props.restart(), RESTART_TIMER)
     })
     .catch(err => {
       console.log('parsing failed', err)
@@ -53,7 +42,6 @@ class ReviewScreen extends React.Component {
   }
 
   render() {
-    console.log('render')
     const labels = STATS.map((stat, i) => {
       return (
         <div key={i} className='review-card-stat-label'>{stat}</div>
@@ -72,25 +60,30 @@ class ReviewScreen extends React.Component {
       )
     }
     return (
-      <div>
+      <div className='review-container'>
         <div className='title'>Your Character</div>
         <div className='review-card'>
           <div className='review-card-title'>{this.props.character.race}</div>
           <div className='review-card-stat-label-container'>
             {labels}
+            <div className='review-card-stat-label'>XP points</div>
           </div>
           <div className='review-card-stat-value-container'>
             {values}
+            <div className='review-card-stat-value'>0</div>
           </div>
           <div className='review-card-avatar'>
             <img src={`static/img/${this.props.character.race}.png`}/>
-            <div>Level: 1 of 3</div>
+            <div>Level: 1 of {MAX_LEVEL}</div>
           </div>
         </div>
         <div className='review-player-no'>
           <div className='review-player-no-label'>Player No. {this.props.character.num}</div>
           <div className='review-player-no-help'>Write this number down to track your progress & view the leaderboard online!</div>
-          <div className='review-player-timer'>restarting in {this.state.secondsUntilRestart}</div>
+        </div>
+        <div className='review-start-over' onClick={this.props.restart.bind(this)}>
+          <img src='static/img/start-over.svg'/>
+          <div>Start Over</div>
         </div>
         <div className='review-url'>ExileFromMorewood.com</div>
       </div>

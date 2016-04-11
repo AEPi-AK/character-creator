@@ -1,21 +1,27 @@
 @import './Base.less';
 
+.review-container {
+  position: relative;
+}
+
 .review-card {
   .card;
-  width: 440px;
-  height: 225px;
+  width: 443px;
+  height: 246px;
   text-align: left;
   position: relative;
-  margin-bottom: 37px;
+  margin-bottom: 30px;
+  margin-top: 10px;
   margin-left: 35px;
-  margin-top: 20px;
+  margin-right: 35px;
+  float: right;
 }
 
 .review-card-title {
   color: @yellow;
   font-size: 42px;
   margin-left: 80px;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 18px;
 }
 
@@ -27,6 +33,7 @@
   position: absolute;
   text-transform: capitalize;
   left: 35px;
+  margin-top: -10px;
 }
 
 .review-card-stat-value-container {
@@ -35,17 +42,19 @@
   font-family: 'Fell SC';
   position: absolute;
   left: 180px;
+  margin-top: -10px;
 }
 
 .review-card-avatar {
   position: absolute;
-  right: 28px;
-  top: 35px;
+  right: 35px;
+  top: 50px;
   text-align: center;
 }
 
 .review-card-avatar > img {
   height: 130px;
+  margin-left: 15px;
 }
 
 .review-card-avatar > div {
@@ -53,23 +62,27 @@
 }
 
 .review-player-no {
-  margin-top: 33px;
-  margin-right: 37px;
+  margin-top: 30px;
 }
 
 .review-player-no-label {
   font-size: 36px;
+  margin-left: 20px;
 }
 
 .review-player-no-help {
   font-size: 28px;
   margin-top: 15px;
   color: @red;
+  max-width: 268px;
+  margin-left: 28px;
 }
 
 .review-url {
   color: @yellow;
-  font-size: 50px;
+  font-size: 40px;
+  text-align: left;
+  margin-left: 35px;
 }
 
 @spinner-size: 100px;
@@ -88,8 +101,26 @@
   }
 }
 
-.review-player-timer {
-  text-align: left;
+.review-start-over {
+  .button;
+  width: 256px;
+  height: 53px;
+  padding-top: 17px;
+  position: absolute;
+  right: 35px;
+  bottom: -10px;
+}
+
+.review-start-over > img {
   float: left;
-  margin-left: 90px;
+  height: 30px;
+  margin-left: 23px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.review-start-over > div {
+  .button-label;
+  width: 256px;
+  font-size: 33px;
 }
