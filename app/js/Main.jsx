@@ -14,7 +14,7 @@ class Main extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = this.initialState = {
       screen: 0,
       character: {
         race: null,
@@ -48,10 +48,15 @@ class Main extends React.Component {
     this.setState({character});
   }
 
+  restart() {
+    this.setState(this.initialState);
+  }
+
   render() {
     const screens = this.screens.map(screen => {
-      const Screen = React.createFactory(screen);
+      const Screen = React.createFactory(screen)
       return Screen({
+        restart: this.restart.bind(this),
         advanceScreen: this.advanceScreen.bind(this),
         setCharacter: this.setCharacter.bind(this),
         character: this.state.character,

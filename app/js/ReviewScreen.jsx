@@ -6,7 +6,9 @@ import { STATS } from './Game.jsx'
 
 import '../less/ReviewScreen.less'
 
-const SERVER_BASE = 'http://localhost:8000' || 'http://api.ExileFromMorewood.com'
+// Milliseconds before the character creator will return to the home screen.
+const RESTART_TIMER = 30000
+const API_BASE = 'http://localhost:8000' || 'http://api.ExileFromMorewood.com'
 
 class ReviewScreen extends React.Component {
 
@@ -14,12 +16,13 @@ class ReviewScreen extends React.Component {
     super(props);
     this.state = {
       loaded: false,
+      secondsUntilRestart: RESTART_TIMER / 1000
     }
     this.createCharacter();
   }
 
   createCharacter() {
-    return fetch(SERVER_BASE + '/characters/create', {
+    return fetch(API_BASE + '/characters/create', {
       method: 'POST',
       headers: {
        'Accept': 'application/json',
@@ -31,7 +34,18 @@ class ReviewScreen extends React.Component {
     .then(response => {
       this.props.character.num = response.num
       this.props.setCharacter(this.props.character)
-      this.setState({loaded: true})
+      this.setState({loaded: true, tsLoaded: Date.now()})
+      setTimeout(() => {
+        this.props.restart()
+      }, RESTART_TIMER)
+      const intervalTimer = setInterval(() => {
+        this.setState({
+          secondsUntilRestart: Math.round((RESTART_TIMER - (Date.now() - this.state.tsLoaded)) / 1000)
+        })
+        if (this.state.secondsUntilRestart <= 0) {
+          clearInterval(intervalTimer)
+        }
+      }, 250)
     })
     .catch(err => {
       console.log('parsing failed', err)
@@ -39,6 +53,7 @@ class ReviewScreen extends React.Component {
   }
 
   render() {
+    console.log('render')
     const labels = STATS.map((stat, i) => {
       return (
         <div key={i} className='review-card-stat-label'>{stat}</div>
@@ -75,6 +90,7 @@ class ReviewScreen extends React.Component {
         <div className='review-player-no'>
           <div className='review-player-no-label'>Player No. {this.props.character.num}</div>
           <div className='review-player-no-help'>Write this number down to track your progress & view the leaderboard online!</div>
+          <div className='review-player-timer'>restarting in {this.state.secondsUntilRestart}</div>
         </div>
         <div className='review-url'>ExileFromMorewood.com</div>
       </div>
