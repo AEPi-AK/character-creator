@@ -1,14 +1,41 @@
 import React from 'react'
+import Spinner from 'react-spinkit'
+import 'whatwg-fetch'
 
 import { STATS } from './Game.jsx'
 
 import '../less/ReviewScreen.less'
 
+const SERVER_BASE = 'http://localhost:8000' || 'http://api.ExileFromMorewood.com'
+
 class ReviewScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      loaded: false,
+    }
+    this.createCharacter();
+  }
+
+  createCharacter() {
+    return fetch(SERVER_BASE + '/characters/create', {
+      method: 'POST',
+      headers: {
+       'Accept': 'application/json',
+       'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({data: String(Math.random())}), // TODO: Scan data
+    })
+    .then(data => data.json() )
+    .then(response => {
+      this.props.character.num = response.num
+      this.props.setCharacter(this.props.character)
+      this.setState({loaded: true})
+    })
+    .catch(err => {
+      console.log('parsing failed', err)
+    })
   }
 
   render() {
@@ -22,6 +49,13 @@ class ReviewScreen extends React.Component {
         <div key={i} className='review-card-stat-value'>{this.props.character[stat]}/20</div>
       )
     })
+    if (!this.state.loaded) {
+      return (
+        <div className='review-loading'>
+          <Spinner noFadeIn={true} spinnerName='circle'/>
+        </div>
+      )
+    }
     return (
       <div>
         <div className='title'>Your Character</div>

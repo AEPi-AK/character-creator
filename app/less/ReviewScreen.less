@@ -71,3 +71,19 @@
   color: @yellow;
   font-size: 50px;
 }
+
+@spinner-size: 100px;
+
+.review-loading {
+  position: absolute;
+  top: (480px - @spinner-size) / 2;
+  left: (800px - @spinner-size) / 2;
+  > .spinner {
+    width: @spinner-size;
+    height: @spinner-size;
+  }
+
+  .circle::before {
+    background-color: @yellow;
+  }
+}
