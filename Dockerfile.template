@@ -17,13 +17,20 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
-RUN mkdir -p /usr/src/app && ln -s /usr/src/app /app
-COPY package.json /usr/src/app/package.json
-WORKDIR /usr/src/app
-RUN JOBS=MAX npm install --unsafe-perm
+RUN mkdir -p /usr/src/app
 
-COPY . /usr/src/app
+WORKDIR /usr/src/app
+
+# for caching purposes
+COPY package.json ./
+
+# install deps
+RUN JOBS=MAX npm install --unsafe-perm && npm cache clean
+# build assets
 RUN ./node_modules/webpack/bin/webpack.js
+
+# copy all files for caching purposes
+COPY . ./
 
 # CMD ["xinit", "/usr/src/app/launch_app.sh", "--kiosk", "--", "-nocursor"]
 CMD ["xinit", "/usr/src/app/launch_app.sh", "--kiosk", "--"]
