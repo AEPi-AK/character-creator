@@ -23,6 +23,7 @@ body {
   background-color: @bg;
   color: @yellow;
   margin: 0;
+  font-family: 'Fell';
 }
 
 .container {
@@ -35,53 +36,51 @@ body {
     height: 180px;
     margin-top: -10px;
   }
+}
 
-  .pretitle {
-    margin-top: 40px;
-    font-family: 'Fell';
-    font-size: 50px;
-    margin-left: -300px;
+.pretitle {
+  margin-top: 40px;
+  font-size: 50px;
+  margin-left: -300px;
+}
+
+.title {
+  margin-top: 20px;
+  font-size: 70px;
+}
+
+.subtitle {
+  font-family: 'Fell Italic';
+  font-size: 55px;
+  margin-left: 120px;
+  margin-top: -20px;
+}
+
+.cta {
+  font-family: 'Fell SC';
+  font-size: 70px;
+  color: @red;
+  margin-top: 30px;
+}
+
+.pulsate {
+  animation: pulsate 2s ease-in-out;
+  animation-iteration-count: infinite;
+  opacity: 0.5;
+}
+
+@-webkit-keyframes pulsate {
+  0% {
+    opacity: 0.85;
+    transform: scale(1);
   }
-
-  .title {
-    margin-top: 40px;
-    font-family: 'Fell';
-    font-size: 70px;
+  50% {
+    opacity: 1.0;
+    transform: scale(1.15);
   }
-
-  .subtitle {
-    font-family: 'Fell Italic';
-    font-size: 55px;
-    margin-left: 120px;
-    margin-top: -20px;
-  }
-
-  .cta {
-    font-family: 'Fell SC';
-    font-size: 70px;
-    color: @red;
-    margin-top: 30px;
-  }
-
-  .pulsate {
-    animation: pulsate 2s ease-in-out;
-    animation-iteration-count: infinite;
-    opacity: 0.5;
-  }
-
-  @-webkit-keyframes pulsate {
-    0% {
-      opacity: 0.85;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 1.0;
-      transform: scale(1.15);
-    }
-    100% {
-      opacity: 0.85;
-      transform: scale(1);
-    }
+  100% {
+    opacity: 0.85;
+    transform: scale(1);
   }
 }
 
@@ -99,7 +98,6 @@ body {
 }
 
 .scan-help {
-  font-family: 'Fell';
   font-size: 20px;
   max-width: 472px;
   margin: 0 auto;
@@ -121,7 +119,6 @@ body {
 
 .create-title {
   white-space: pre;
-  font-family: 'Fell';
   font-size: 30px;
   padding-top: 52px;
 }
@@ -190,7 +187,7 @@ body {
   font-family:'Fell SC';
 }
 
-.race-block {
+.race-card {
   background: #3B3B3B;
   border-radius: 24px;
   border-style: solid;
@@ -200,18 +197,90 @@ body {
   margin-top: 18px;
   float: left;
   box-shadow: 0 6px 8px 0 black;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   cursor: pointer;
 }
 
-.race-block > div {
-  font-family: 'Fell';
+.race-card > div {
   font-size: 36.8px;
 }
 
-.race-block > img {
+.race-card > img {
   margin-top: 10px;
+  height: 230px;
 }
 
 .race-container {
   margin-left: 30px;
+}
+
+.review-card {
+  .race-card;
+  width: 440px;
+  height: 225px;
+  text-align: left;
+  position: relative;
+  margin-bottom: 37px;
+  margin-left: 35px;
+  margin-top: 20px;
+}
+
+.review-url {
+  color: @yellow;
+  font-size: 50px;
+}
+
+.review-card-title {
+  color: @yellow;
+  font-size: 42px;
+  margin-left: 80px;
+  margin-top: 30px;
+  margin-bottom: 18px;
+}
+
+.review-card-stat-label-container {
+  color: @yellow;
+  font-size: 28px;
+  font-family: 'Fell SC';
+  text-align: right;
+  position: absolute;
+  left: 35px;
+}
+
+.review-card-stat-value-container {
+  color: @yellow;
+  font-size: 28px;
+  font-family: 'Fell SC';
+  position: absolute;
+  left: 180px;
+}
+
+.review-card-avatar {
+  position: absolute;
+  right: 28px;
+  top: 35px;
+  text-align: center;
+}
+
+.review-card-avatar > img {
+  height: 130px;
+}
+
+.review-card-avatar > div {
+  font-size: 26px;
+}
+
+.review-player-no {
+  margin-top: 33px;
+  margin-right: 37px;
+}
+
+.review-player-no-label {
+  font-size: 36px;
+}
+
+.review-player-no-help {
+  font-size: 28px;
+  margin-top: 15px;
+  color: @red;
 }

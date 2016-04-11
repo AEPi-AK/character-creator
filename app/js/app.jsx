@@ -118,7 +118,7 @@ class StatsScreen extends React.Component {
 
 }
 
-class StartScreen extends React.Component {
+class SplashScreen extends React.Component {
 
   render() {
     return (
@@ -182,7 +182,7 @@ class RaceScreen extends React.Component {
   render() {
       const races = this.races.map((name, i) => {
         return (
-          <div className='race-block' onClick={this.props.updateRace.bind(this, name)}>
+          <div className='race-card' onClick={this.props.updateRace.bind(this, name)}>
             <img src={`static/img/${name}.png`}/>
             <div>{name}</div>
           </div>
@@ -192,6 +192,44 @@ class RaceScreen extends React.Component {
         <div className='race-container'>
           <div className='race-title'>Choose a Race</div>
           {races}
+        </div>
+      )
+    }
+}
+
+class ReviewScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
+  render() {
+      return (
+        <div>
+          <div className='title'>Your Character</div>
+          <div className='review-card'>
+            <div className='review-card-title'>Dwarf</div>
+            <div className='review-card-stat-label-container'>
+              <div className='review-card-stat-label'>Strength</div>
+              <div className='review-card-stat-label'>Wisdom</div>
+              <div className='review-card-stat-label'>Dexterity</div>
+            </div>
+            <div className='review-card-stat-value-container'>
+              <div className='review-card-stat-value'>15/20</div>
+              <div className='review-card-stat-value'>9/20</div>
+              <div className='review-card-stat-value'>18/20</div>
+            </div>
+            <div className='review-card-avatar'>
+              <img src={`static/img/${'dwarf'}.png`}/>
+              <div>Level: 1 of 3</div>
+            </div>
+          </div>
+          <div className='review-player-no'>
+            <div className='review-player-no-label'>Player No. 323</div>
+            <div className='review-player-no-help'>Write this number down to track your progress & view the leaderboard online!</div>
+          </div>
+          <div className='review-url'>ExileFromMorewood.com</div>
         </div>
       )
     }
@@ -207,11 +245,12 @@ class Main extends React.Component {
     }
 
     this.screens = [
-      StartScreen,
+      SplashScreen,
       ScanScreen,
       CreateScreen,
       RaceScreen,
       StatsScreen,
+      ReviewScreen,
     ]
   }
 
