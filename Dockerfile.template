@@ -26,11 +26,12 @@ COPY package.json ./
 
 # install deps
 RUN JOBS=MAX npm install --unsafe-perm && npm cache clean
-# build assets
-RUN ./node_modules/webpack/bin/webpack.js
 
 # copy all files for caching purposes
 COPY . ./
+
+# build assets
+RUN ./node_modules/webpack/bin/webpack.js
 
 # CMD ["xinit", "/usr/src/app/launch_app.sh", "--kiosk", "--", "-nocursor"]
 CMD ["xinit", "/usr/src/app/launch_app.sh", "--kiosk", "--"]
