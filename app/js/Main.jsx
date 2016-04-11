@@ -16,8 +16,8 @@ class Main extends React.Component {
     super(props);
     this.state = this.initialState = {
       screen: 0,
-      scanData: '',
       character: {
+        id: null,
         race: null,
         strength: 0,
         wisdom: 0,
@@ -35,19 +35,6 @@ class Main extends React.Component {
       StatsScreen,
       ReviewScreen,
     ]
-  }
-
-  onKeyUp(e) {
-    if (e.keyCode == 13) {
-      const scanner = ReactDOM.findDOMNode(this.refs.scanner)
-      this.setState({scanData: scanner.value})
-      scanner.value = ''
-    }
-  }
-
-  onBlur() {
-    console.log('blur')
-    this.refs.scanner.focus()
   }
 
   advanceScreen(index) {
@@ -78,14 +65,6 @@ class Main extends React.Component {
     })
     return (
       <div className='screen'>
-        <input
-          type='text'
-          ref='scanner'
-          onKeyUp={this.onKeyUp.bind(this)}
-          autoFocus={true}
-          onBlur={this.onBlur.bind(this)}
-        />
-        <h1>{this.state.scanData}</h1>
         {screens[this.state.screen]}
       </div>
     )

@@ -1,12 +1,33 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 
 import '../less/ScanScreen.less'
 
 class ScanScreen extends React.Component {
 
+  onKeyUp(e) {
+    if (e.keyCode == 13) {
+      this.props.character.id = ReactDOM.findDOMNode(this.refs.scanner).value
+      this.props.setCharacter(this.props.character)
+      this.props.advanceScreen()
+    }
+  }
+
+  onBlur() {
+    this.refs.scanner.focus()
+  }
+
   render() {
     return (
-      <div onClick={this.props.advanceScreen}>
+      <div>
+        <input
+          type='text'
+          ref='scanner'
+          onKeyUp={this.onKeyUp.bind(this)}
+          autoFocus={true}
+          onBlur={this.onBlur.bind(this)}
+        />
+        <h1>{this.props.character.id}</h1>
         <div className='scan-title'>Welcome, brave adventurer!</div>
         <div className='scan-cta'>scan card to continue</div>
         <div className='scan-card-container'>

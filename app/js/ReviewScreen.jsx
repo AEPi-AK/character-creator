@@ -27,7 +27,7 @@ class ReviewScreen extends React.Component {
        'Accept': 'application/json',
        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({data: String(Math.random())}), // TODO: Scan data
+      body: JSON.stringify({data: this.props.character.id}),
     })
     .then(data => data.json() )
     .then(response => {
