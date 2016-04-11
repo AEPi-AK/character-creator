@@ -1,4 +1,5 @@
 import React from 'react'
+import { STATS, rollDie } from './Game.jsx'
 
 import '../less/StatsScreen.less'
 
@@ -7,13 +8,13 @@ class Cube extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      face: 12,
+      face: 20,
       rolled: false,
     }
   }
 
   roll() {
-    this.setState({face: Math.floor(Math.random() * 20) + 1});
+    this.setState({face: rollDie()});
     setTimeout(() => {
       this.setState({rolled: true})
       this.refs.value.className += ' zoomIn';
@@ -63,7 +64,6 @@ class StatsScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.cubes = ['strength', 'wisdom', 'dexterity'];
     this.state = {
       rolled: false,
       rolling: false,
@@ -71,15 +71,19 @@ class StatsScreen extends React.Component {
   }
 
   rollAll() {
-    this.cubes.map((name, i) => {
+    STATS.map((stat, i) => {
       setTimeout(() => this.refs['cube' + i].roll(), 1500 * i)
     })
     this.setState({rolled: true, rolling: true});
-    setTimeout(() => this.setState({rolling: false}), 1500 * this.cubes.length)
+    setTimeout(() => this.setState({rolling: false}), 1500 * STATS.length)
   }
 
   onClick() {
     if (this.state.rolled && !this.state.rolling) {
+      this.props.character.strength = this.refs.cube0.state.face;
+      this.props.character.wisdom = this.refs.cube1.state.face;
+      this.props.character.dexterity = this.refs.cube2.state.face;
+      this.props.setCharacter(this.props.character);
       this.props.advanceScreen();
     }
     else if (this.state.rolled && this.state.rolling) {
@@ -91,8 +95,8 @@ class StatsScreen extends React.Component {
   }
 
   render() {
-    const cubes = this.cubes.map((name, i) => {
-      return <Cube key={i} ref={'cube' + i} leftOffset={250 * i} name={name}/>
+    const cubes = STATS.map((stat, i) => {
+      return <Cube key={i} ref={'cube' + i} leftOffset={250 * i} name={stat}/>
     })
     let titleText;
     if (this.state.rolled && !this.state.rolling) {

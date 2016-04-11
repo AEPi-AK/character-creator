@@ -16,7 +16,14 @@ class Main extends React.Component {
     super(props);
     this.state = {
       screen: 0,
-      race: null,
+      character: {
+        race: null,
+        strength: 0,
+        wisdom: 0,
+        dexterity: 0,
+        experience: 0,
+        num: 0,
+      }
     }
 
     this.screens = [
@@ -29,19 +36,26 @@ class Main extends React.Component {
     ]
   }
 
-  advanceScreen() {
-    this.setState({screen: this.state.screen + 1})
+  advanceScreen(index) {
+    if (typeof index === 'number') {
+      this.setState({screen: index})
+    } else {
+      this.setState({screen: this.state.screen + 1})
+    }
   }
 
-  updateRace(newRace) {
-    this.setState({screen: this.state.screen + 1, race: newRace})
+  setCharacter(character) {
+    this.setState({character});
   }
 
   render() {
     const screens = this.screens.map(screen => {
       const Screen = React.createFactory(screen);
-      return Screen({advanceScreen: this.advanceScreen.bind(this),
-        updateRace:this.updateRace.bind(this)})
+      return Screen({
+        advanceScreen: this.advanceScreen.bind(this),
+        setCharacter: this.setCharacter.bind(this),
+        character: this.state.character,
+      })
     })
     return (
       <div className='screen'>

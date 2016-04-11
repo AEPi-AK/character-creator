@@ -1,21 +1,28 @@
 import React from 'react'
 
+import { RACES } from './Game.jsx'
+
 import '../less/RaceScreen.less'
 
 class RaceScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.races = ['Human', 'Dwarf', 'Elf'];
     this.state = {
       race: null,
     }
   }
 
+  setRace(name) {
+    this.props.character.race = name;
+    this.props.setCharacter(this.props.character);
+    this.props.advanceScreen();
+  }
+
   render() {
-      const races = this.races.map((name, i) => {
+      const races = RACES.map((name, i) => {
         return (
-          <div className='race-card' key={i} onClick={this.props.updateRace.bind(this, name)}>
+          <div className='race-card' key={i} onClick={this.setRace.bind(this, name)}>
             <img src={`static/img/${name}.png`}/>
             <div>{name}</div>
           </div>
