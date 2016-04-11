@@ -220,7 +220,7 @@ class Main extends React.Component {
   }
 
   updateRace(newRace) {
-    this.setState({screen: this.state.screen + 1, race:newRace})
+    this.setState({screen: this.state.screen + 1, race: newRace})
   }
 
   render() {
