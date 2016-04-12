@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Spinner from 'react-spinkit'
 
 import SplashScreen from './SplashScreen.jsx'
 import ScanScreen from './ScanScreen.jsx'
@@ -17,6 +18,7 @@ class Main extends React.Component {
     super(props);
     this.state = this.initialState = {
       screen: 0,
+      isLoading: false,
       character: {
         id: null,
         race: null,
@@ -36,7 +38,7 @@ class Main extends React.Component {
       StatsScreen,
       ReviewScreen,
       FinishScreen,
-    ]
+    ].map(component => React.createFactory(component))
   }
 
   advanceScreen(index) {
@@ -47,24 +49,25 @@ class Main extends React.Component {
     }
   }
 
-  setCharacter(character) {
-    this.setState({character});
-  }
-
   restart() {
     this.setState(this.initialState);
   }
 
   render() {
-    const screens = this.screens.map(screen => {
-      const Screen = React.createFactory(screen)
-      return Screen({
-        restart: this.restart.bind(this),
-        advanceScreen: this.advanceScreen.bind(this),
-        setCharacter: this.setCharacter.bind(this),
-        character: this.state.character,
-      })
-    })
+    if (this.state.isLoading) {
+      return (
+        <div className='screen-loading'>
+          <Spinner noFadeIn={true} spinnerName='circle'/>
+        </div>
+      )
+    }
+    const screens = this.screens.map(screen => screen({
+      restart: this.restart.bind(this),
+      advanceScreen: this.advanceScreen.bind(this),
+      setCharacter: character => this.setState({character}),
+      setIsLoading: isLoading => this.setState({isLoading}),
+      character: this.state.character,
+    }))
     return (
       <div className='screen'>
         {screens[this.state.screen]}

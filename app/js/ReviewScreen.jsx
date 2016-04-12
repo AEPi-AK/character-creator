@@ -1,6 +1,4 @@
 import React from 'react'
-import Spinner from 'react-spinkit'
-import 'whatwg-fetch'
 
 import CharacterCard from './CharacterCard.jsx'
 import { createCharacter, STATS, MAX_LEVEL } from './Game.jsx'
@@ -9,26 +7,13 @@ import '../less/ReviewScreen.less'
 
 class ReviewScreen extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      loaded: false,
-    }
-
-    createCharacter(this.props.character, (err, character) => {
-      this.setState({loaded: true})
-    })
+  async componentWillMount() {
+    this.props.setIsLoading(true)
+    const character = await createCharacter(this.props.character)
+    this.props.setCharacter(character)
   }
 
-
   render() {
-    if (!this.state.loaded) {
-      return (
-        <div className='review-loading'>
-          <Spinner noFadeIn={true} spinnerName='circle'/>
-        </div>
-      )
-    }
     return (
       <div className='review-container'>
         <div className='title'>Your Character</div>
