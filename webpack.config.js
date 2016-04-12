@@ -4,7 +4,10 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 
 module.exports = {
-  entry: './js/Main.jsx',
+  entry:  [
+    'babel-polyfill',
+    './js/Main.jsx',
+  ],
 	context: path.join(__dirname, 'app'),
   plugins: [
     new CopyWebpackPlugin([
@@ -26,14 +29,18 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['es2015', 'react'],
-        }
+          presets: ['es2015', 'react', 'stage-0'],
+        },
+        plugins: ['transform-runtime'],
       },
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
       },
-      { test: /\.(ttf|otf|png)$/, loader: 'url-loader?limit=100000' },
+      {
+        test: /\.(ttf|otf|png)$/,
+        loader: 'url-loader',
+      },
       {
         test: /\.less$/,
         loader: 'style!css!postcss!less',
