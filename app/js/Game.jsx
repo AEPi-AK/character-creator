@@ -1,3 +1,4 @@
+import 'whatwg-fetch'
 const RACES = ['Human', 'Dwarf', 'Elf']
 const STATS = ['strength', 'wisdom', 'dexterity']
 const MAX_LEVEL = 6
@@ -7,6 +8,14 @@ function rollDie() {
    return Math.floor(Math.random() * 20) + 1
 }
 
+async function getCharacter(identifier) {
+  const response = await fetch(api_base + `/characters/${identifier}`)
+  if (response.status == 404) {
+    return null
+  }
+  return await response.json()
+}
+
 function createCharacter(character, callback) {
   return fetch(api_base + '/characters/create', {
     method: 'POST',
@@ -14,22 +23,20 @@ function createCharacter(character, callback) {
      'Accept': 'application/json',
      'Content-Type': 'application/json'
     },
-    body: JSON.stringify({data: character.id}),
+    body: JSON.stringify(character),
   })
   .then(data => data.json())
-  .then(response => {
-    // TODO: Set character directly from response once endpoint is updated.
-    character.num = response.num
+  .then(character => {
     callback(null, character)
   })
   .catch(callback)
 }
-
 
 export {
   RACES,
   STATS,
   MAX_LEVEL,
   rollDie,
+  getCharacter,
   createCharacter,
 }
