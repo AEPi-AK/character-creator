@@ -7,6 +7,7 @@ import CreateScreen from './CreateScreen.jsx'
 import RaceScreen from './RaceScreen.jsx'
 import StatsScreen from './StatsScreen.jsx'
 import ReviewScreen from './ReviewScreen.jsx'
+import FinishScreen from './FinishScreen.jsx'
 
 import '../less/Main.less'
 
@@ -34,6 +35,7 @@ class Main extends React.Component {
       RaceScreen,
       StatsScreen,
       ReviewScreen,
+      FinishScreen,
     ]
   }
 
