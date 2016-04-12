@@ -60,9 +60,9 @@ class ReviewScreen extends React.Component {
           <div className='review-player-no-label'>Player No. {this.props.character.num}</div>
           <div className='review-player-no-help'>Write this number down to track your progress & view the leaderboard online!</div>
         </div>
-        <div className='review-start-over' onClick={this.props.restart.bind(this)}>
-          <img src='static/img/start-over.svg'/>
-          <div>Start Over</div>
+        <div className='review-finish' onClick={this.props.restart.bind(this)}>
+          <img src='static/img/finish.svg'/>
+          <div>Finish</div>
         </div>
         <div className='review-url'>ExileFromMorewood.com</div>
       </div>

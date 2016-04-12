@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="46px" height="35px" viewBox="0 0 46 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ReivewScreen" transform="translate(-578.000000, -404.000000)" fill="#000000">
+            <g id="Activate" transform="translate(553.000000, 386.000000)">
+                <path d="M64.8450549,18.3056473 C64.4382771,17.8981176 63.7803647,17.8981176 63.3735868,18.3056473 L41.1211096,40.5581245 L31.7419104,31.1789253 C31.3351325,30.7728994 30.6772201,30.7728994 30.2704423,31.1789253 L25.3056473,36.1444722 C24.8981176,36.5504981 24.8981176,37.2069067 25.3056473,37.6151884 L35.4202046,47.7297457 L40.3849996,52.6937888 C40.7917774,53.1020704 41.4496898,53.1020704 41.8564677,52.6937888 L46.8220146,47.7297457 L69.809098,24.7419104 C70.2166277,24.3358844 70.2166277,23.6772201 69.8098499,23.2711942 L64.8450549,18.3056473 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
