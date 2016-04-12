@@ -27,7 +27,6 @@ class ScanScreen extends React.Component {
           autoFocus={true}
           onBlur={this.onBlur.bind(this)}
         />
-        <h1>{this.props.character.id}</h1>
         <div className='scan-title'>Welcome, brave adventurer!</div>
         <div className='scan-cta'>scan card to continue</div>
         <div className='scan-card-container'>
