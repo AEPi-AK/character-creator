@@ -2,13 +2,9 @@ import React from 'react'
 import Spinner from 'react-spinkit'
 import 'whatwg-fetch'
 
-import { STATS, MAX_LEVEL } from './Game.jsx'
+import { createCharacter, STATS, MAX_LEVEL } from './Game.jsx'
 
 import '../less/ReviewScreen.less'
-
-// Milliseconds before the character creator will return to the home screen.
-const RESTART_TIMER = 30000
-const API_BASE = 'http://api.ExileFromMorewood.com'
 
 class ReviewScreen extends React.Component {
 
@@ -17,29 +13,12 @@ class ReviewScreen extends React.Component {
     this.state = {
       loaded: false,
     }
-    this.createCharacter();
+
+    createCharacter(this.props.character, (err, character) => {
+      this.setState({loaded: true})
+    })
   }
 
-  createCharacter() {
-    return fetch(API_BASE + '/characters/create', {
-      method: 'POST',
-      headers: {
-       'Accept': 'application/json',
-       'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({data: this.props.character.id}),
-    })
-    .then(data => data.json() )
-    .then(response => {
-      this.props.character.num = response.num
-      this.props.setCharacter(this.props.character)
-      this.setState({loaded: true})
-      setTimeout(() => this.props.restart(), RESTART_TIMER)
-    })
-    .catch(err => {
-      console.log('parsing failed', err)
-    })
-  }
 
   render() {
     const labels = STATS.map((stat, i) => {

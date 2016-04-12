@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import { STATS, rollDie } from './Game.jsx'
 
 import '../less/StatsScreen.less'
@@ -99,19 +100,22 @@ class StatsScreen extends React.Component {
       return <Cube key={i} ref={'cube' + i} leftOffset={250 * i} name={stat}/>
     })
     let titleText;
+    let cta = false;
     if (this.state.rolled && !this.state.rolling) {
       titleText = 'Tap To Continue'
-      this.refs.title.className += ' pulsate';
+      cta = true;
     }
     else if (this.state.rolled && this.state.rolling) {
       titleText = 'Rolling...'
     } else {
       titleText = 'Tap To Roll For Stats'
+      cta = true;
     }
+    const classes = classNames('stats-title', {cta})
     const readyForNextScreen = this.state.rolled && !this.state.rolling;
     return (
       <div onClick={this.onClick.bind(this)}>
-        <div ref='title' className='title'>{titleText}</div>
+        <div ref='title' className={classes}>{titleText}</div>
         {cubes}
       </div>
     )
