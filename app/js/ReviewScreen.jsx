@@ -2,6 +2,7 @@ import React from 'react'
 import Spinner from 'react-spinkit'
 import 'whatwg-fetch'
 
+import CharacterCard from './CharacterCard.jsx'
 import { createCharacter, STATS, MAX_LEVEL } from './Game.jsx'
 
 import '../less/ReviewScreen.less'
@@ -21,16 +22,6 @@ class ReviewScreen extends React.Component {
 
 
   render() {
-    const labels = STATS.map((stat, i) => {
-      return (
-        <div key={i} className='review-card-stat-label'>{stat}</div>
-      )
-    })
-    const values = STATS.map((stat, i) => {
-      return (
-        <div key={i} className='review-card-stat-value'>{this.props.character[stat]}/20</div>
-      )
-    })
     if (!this.state.loaded) {
       return (
         <div className='review-loading'>
@@ -41,21 +32,7 @@ class ReviewScreen extends React.Component {
     return (
       <div className='review-container'>
         <div className='title'>Your Character</div>
-        <div className='review-card'>
-          <div className='review-card-title'>{this.props.character.race}</div>
-          <div className='review-card-stat-label-container'>
-            {labels}
-            <div className='review-card-stat-label'>XP points</div>
-          </div>
-          <div className='review-card-stat-value-container'>
-            {values}
-            <div className='review-card-stat-value'>0</div>
-          </div>
-          <div className='review-card-avatar'>
-            <img src={`static/img/${this.props.character.race}.png`}/>
-            <div>Level: 1 of {MAX_LEVEL}</div>
-          </div>
-        </div>
+        <CharacterCard character={this.props.character}/>
         <div className='review-player-no'>
           <div className='review-player-no-label'>Player No. {this.props.character.num}</div>
           <div className='review-player-no-help'>Write this number down to track your progress & view the leaderboard online!</div>

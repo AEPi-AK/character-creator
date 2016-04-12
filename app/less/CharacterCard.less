@@ -1,0 +1,58 @@
+@import './Base.less';
+
+.character-card {
+  .card;
+  width: 443px;
+  height: 246px;
+  text-align: left;
+  position: relative;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  margin-left: 35px;
+  margin-right: 35px;
+  float: right;
+}
+
+.character-card-title {
+  color: @yellow;
+  font-size: 42px;
+  margin-left: 80px;
+  margin-top: 20px;
+  margin-bottom: 18px;
+}
+
+.character-card-stat-label-container {
+  color: @yellow;
+  font-size: 28px;
+  font-family: 'Fell SC';
+  text-align: right;
+  position: absolute;
+  text-transform: capitalize;
+  left: 35px;
+  margin-top: -10px;
+}
+
+.character-card-stat-value-container {
+  color: @yellow;
+  font-size: 28px;
+  font-family: 'Fell SC';
+  position: absolute;
+  left: 180px;
+  margin-top: -10px;
+}
+
+.character-card-avatar {
+  position: absolute;
+  right: 35px;
+  top: 50px;
+  text-align: center;
+}
+
+.character-card-avatar > img {
+  height: 130px;
+  margin-left: 15px;
+}
+
+.character-card-avatar > div {
+  font-size: 26px;
+}
