@@ -36,7 +36,7 @@ class FinishScreen extends React.Component {
         <div className='title'>Adventure Awaits</div>
         {panels}
         <div className='finish-button' onClick={this.props.restart.bind(this)}>
-          <div className='button-label'>Finish</div>
+          <div>Finish</div>
         </div>
       </div>
     )
@@ -45,5 +45,3 @@ class FinishScreen extends React.Component {
 }
 
 export default FinishScreen
-
-

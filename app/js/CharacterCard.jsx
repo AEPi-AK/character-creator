@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { STATS, MAX_LEVEL } from './Game.jsx'
+import { calculateLevel, STATS, MAX_LEVEL } from './Game.jsx'
 
 import '../less/CharacterCard.less'
 
@@ -25,11 +25,11 @@ class CharacterScreen extends React.Component {
         </div>
         <div className='character-card-stat-value-container'>
           {values}
-          <div className='character-card-stat-value'>0</div>
+          <div className='character-card-stat-value'>{this.props.character.experience}</div>
         </div>
         <div className='character-card-avatar'>
           <img src={`static/img/${this.props.character.race}.png`}/>
-          <div>Level: 1 of {MAX_LEVEL}</div>
+          <div>Level: {calculateLevel(this.props.character.experience)} of {MAX_LEVEL}</div>
         </div>
       </div>
     )

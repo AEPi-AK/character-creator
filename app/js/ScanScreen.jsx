@@ -15,7 +15,6 @@ class ScanScreen extends React.Component {
     let character = this.props.character
 
     // Value from the scanner
-    // XXX: Shouldn't hash client-side?
     character.id = sha256(ReactDOM.findDOMNode(this.refs.scanner).value)
 
     // Ask the server to look up a character with this scan data
@@ -25,13 +24,13 @@ class ScanScreen extends React.Component {
     }
     this.props.setCharacter(character)
 
-    // Returning player
     if (characterFromServer) {
-      return alert(JSON.stringify(character))
+      // Returning character; continue to UpgradeScreen
+      this.props.advanceScreen(7)
+    } else {
+      // New character; continue to CreateScreen.
+      this.props.advanceScreen()
     }
-
-    // New player. Move on to character creation screen.
-    this.props.advanceScreen()
   }
 
   onBlur() {

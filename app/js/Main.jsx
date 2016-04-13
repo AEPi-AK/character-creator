@@ -9,6 +9,7 @@ import RaceScreen from './RaceScreen.jsx'
 import StatsScreen from './StatsScreen.jsx'
 import ReviewScreen from './ReviewScreen.jsx'
 import FinishScreen from './FinishScreen.jsx'
+import UpgradeScreen from './UpgradeScreen.jsx'
 
 import '../less/Main.less'
 
@@ -38,6 +39,7 @@ class Main extends React.Component {
       StatsScreen,
       ReviewScreen,
       FinishScreen,
+      UpgradeScreen,
     ].map(component => React.createFactory(component))
   }
 
