@@ -65,13 +65,12 @@ class ProfileScreen extends React.Component {
     try {
       await updateCharacter(character)
     } catch (err) {
-      alert('err updating character')
+      // TODO: FIXME
       console.error(err)
     }
     this.props.setIsLoading(false)
 
     this.props.setCharacter(character)
-    alert('upgrade complete! now what...?')
   }
 
   render() {
@@ -117,12 +116,14 @@ class ProfileScreen extends React.Component {
             </div>
         }
         {
-          !isDragonSlayer ?
+          isDragonSlayer ?
+          <div className='done-button' onClick={this.onBack.bind(this)}>
+            <div>Done</div>
+          </div>
+          :
           <div className='back-button' onClick={this.onBack.bind(this)}>
             <div>Upgrade Later</div>
           </div>
-          :
-          null
         }
         <div className='player-number'>Player No. {this.props.character.number}</div>
       </div>

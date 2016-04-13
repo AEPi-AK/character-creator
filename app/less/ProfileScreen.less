@@ -90,18 +90,28 @@
 
   .title {
     color: @red;
-    font-size: 64px;
-    padding-top: 35px;
+    font-size: 55px;
+    padding-top: 25px;
     display: inline-block;
   }
 
   .character-card {
     .pulsate-slow;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 10px;
     float: none;
     transform: scale(1.03);
     box-shadow: 0 0 5px 2px @silver;
+    height: 230px;
+    width: 442.5px;
+
+    .character-card-title {
+      margin-top: 15px;
+    }
+
+    .character-card-avatar {
+      top: 45px;
+    }
   }
 
   .pulsate-slow {
@@ -121,6 +131,21 @@
     to {
       box-shadow: 0 0 5px 2px @silver;
       transform: scale(1.03);
+    }
+  }
+
+  .done-button {
+    .button-secondary;
+    font-size: 30px;
+    color: @red;
+    border: 4px solid @red;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+    > div {
+      margin-left: 20px;
+      margin-right: 20px;
     }
   }
 
