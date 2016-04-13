@@ -1,6 +1,7 @@
 import React from 'react'
+import classNames from 'classnames'
 
-import { calculateLevel, STATS, MAX_LEVEL } from './Game.jsx'
+import { calculateLevel, STATS, DRAGONSLAYER_LEVEL, MAX_LEVEL } from './Game.jsx'
 
 import '../less/CharacterCard.less'
 
@@ -16,9 +17,20 @@ class CharacterScreen extends React.Component {
       return ( <div key={i} className='review-card-stat-value'>{this.props.character[stat]}/20</div>
       )
     })
+    const characterLevel = calculateLevel(this.props.character.points)
+    const isDragonSlayer = this.props.character.pro_id
+    const classes = classNames('character-card',
+      {'character-card-dragonslayer': isDragonSlayer
+    })
     return (
-      <div className='character-card'>
+      <div className={classes}>
         <div className='character-card-title'>{this.props.character.race}</div>
+        {
+          isDragonSlayer ?
+            <img className='icon' src='static/img/dragon.svg'/>
+          :
+          null
+        }
         <div className='character-card-stat-label-container'>
           {labels}
           <div className='character-card-stat-label'>XP points</div>
@@ -29,7 +41,7 @@ class CharacterScreen extends React.Component {
         </div>
         <div className='character-card-avatar'>
           <img src={`static/img/${this.props.character.race}.png`}/>
-          <div>Level: {calculateLevel(this.props.character.points)} of {MAX_LEVEL}</div>
+          <div>Level: {characterLevel} of {MAX_LEVEL}</div>
         </div>
       </div>
     )

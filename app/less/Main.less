@@ -1,7 +1,5 @@
 @import './Base.less';
 
-@width: 800px;
-@height: 480px;
 @spinner-size: 100px;
 
 body {
@@ -15,15 +13,15 @@ body {
 
 .screen {
   border: 1px solid black;
-  width: @width;
-  height: @height;
+  width: @app-width;
+  height: @app-height;
   text-align: center;
 }
 
 .screen-loading {
   position: absolute;
-  top: (@height - @spinner-size) / 2;
-  left: (@width - @spinner-size) / 2;
+  top: (@app-height - @spinner-size) / 2;
+  left: (@app-width - @spinner-size) / 2;
   > .spinner {
     width: @spinner-size;
     height: @spinner-size;

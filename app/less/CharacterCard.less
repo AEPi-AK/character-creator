@@ -6,10 +6,10 @@
   height: 246px;
   text-align: left;
   position: relative;
+  color: @yellow;
 }
 
 .character-card-title {
-  color: @yellow;
   font-size: 42px;
   margin-left: 80px;
   margin-top: 20px;
@@ -17,7 +17,6 @@
 }
 
 .character-card-stat-label-container {
-  color: @yellow;
   font-size: 28px;
   font-family: 'Fell SC';
   text-align: right;
@@ -28,7 +27,6 @@
 }
 
 .character-card-stat-value-container {
-  color: @yellow;
   font-size: 28px;
   font-family: 'Fell SC';
   position: absolute;
@@ -50,4 +48,20 @@
 
 .character-card-avatar > div {
   font-size: 26px;
+}
+
+.character-card-dragonslayer {
+  color: @silver !important;
+  box-shadow: 0 0 5px 2px @silver;
+  border-radius: 24px;
+  border-style: solid;
+  border-color: @silver;
+
+  .icon {
+    width: 57px;
+    height: 45px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+  }
 }

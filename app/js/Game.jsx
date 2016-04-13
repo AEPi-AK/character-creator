@@ -3,7 +3,8 @@ const RACES = ['Human', 'Dwarf', 'Elf']
 const STATS = ['strength', 'wisdom', 'dexterity']
 const MAX_LEVEL = 8
 const DRAGONSLAYER_LEVEL = 4
-const api_base = 'http://api.ExileFromMorewood.com'
+// const api_base = 'http://api.ExileFromMorewood.com'
+const api_base = 'http://localhost:8000'
 
 function rollDie() {
    return Math.floor(Math.random() * 20) + 1
@@ -11,12 +12,12 @@ function rollDie() {
 
 function calculateLevel(points) {
   if (points < 50) return 1
-  if (points < 110) return 2
-  if (points < 220) return 3
-  if (points < 420) return 4
-  if (points < 660) return 5
-  if (points < 840) return 6
-  if (points < 1270) return 7
+  if (points < 230) return 2
+  if (points < 420) return 3
+  if (points < 660) return 4
+  if (points < 840) return 5
+  if (points < 1270) return 6
+  if (points < 1690) return 7
   return 8
 }
 
@@ -29,8 +30,6 @@ async function getCharacter(identifier) {
 }
 
 async function createCharacter(character) {
-  console.log('creating character')
-  console.log(character)
   const response = await fetch(api_base + '/characters/create', {
     method: 'POST',
     headers: {
@@ -41,6 +40,31 @@ async function createCharacter(character) {
   })
 
   if (response.status == 201) { // created
+    return await response.json()
+  }
+
+  if (response.status == 200) { // XXX: This shouldn't be the status code!
+    return await response.json()
+  }
+
+  throw response
+}
+
+async function updateCharacter(character) {
+  const response = await fetch(api_base + '/characters/update', {
+    method: 'POST',
+    headers: {
+     'Accept': 'application/json',
+     'Content-Type': 'application/json'
+    },
+    // pro_id is the only thing we ever want to update from the kiosk
+    body: JSON.stringify({
+      id: character.id,
+      pro_id: character.pro_id
+    }),
+  })
+
+  if (response.status == 200) { // updated
     return await response.json()
   }
 
@@ -56,4 +80,5 @@ export {
   calculateLevel,
   getCharacter,
   createCharacter,
+  updateCharacter,
 }

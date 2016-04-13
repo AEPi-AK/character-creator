@@ -7,10 +7,19 @@ import '../less/ReviewScreen.less'
 
 class ReviewScreen extends React.Component {
 
-  async componentWillMount() {
-    this.props.setIsLoading(true)
-    const character = await createCharacter(this.props.character)
-    this.props.setCharacter(character)
+  async componentDidMount() {
+    // XXX: Prevents componentDidMount from being called twice in ReviewScreen
+    // since it changes state.
+    // See: http://stackoverflow.com/questions/28720769
+    if (window.lock === undefined) {
+      console.log('no-op')
+      window.lock = true
+      this.props.setIsLoading(true)
+      const character = await createCharacter(this.props.character)
+      this.props.setIsLoading(false)
+      this.props.setCharacter(character)
+    }
+
   }
 
   render() {

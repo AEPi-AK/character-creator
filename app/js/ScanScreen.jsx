@@ -8,10 +8,6 @@ import '../less/ScanScreen.less'
 
 class ScanScreen extends React.Component {
 
-  constructor(props) {
-    super(props)
-  }
-
   async onData(data) {
     let character = this.props.character
 
