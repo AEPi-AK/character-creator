@@ -1,16 +1,37 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import sha256 from 'js-sha256'
+
+import { getCharacter } from './Game.jsx'
 
 import '../less/ScanScreen.less'
 
 class ScanScreen extends React.Component {
 
-  onKeyUp(e) {
-    if (e.keyCode == 13) {
-      this.props.character.id = ReactDOM.findDOMNode(this.refs.scanner).value
-      this.props.setCharacter(this.props.character)
-      this.props.advanceScreen()
+  async onKeyUp(e) {
+    // Only when the return key is pressed
+    if (e.keyCode !== 13) return
+
+    let character = this.props.character
+
+    // Value from the scanner
+    // XXX: Shouldn't hash client-side?
+    character.id = sha256(ReactDOM.findDOMNode(this.refs.scanner).value)
+
+    // Ask the server to look up a character with this scan data
+    const characterFromServer = await getCharacter(character.id)
+    if (characterFromServer != null) {
+      character = characterFromServer
     }
+    this.props.setCharacter(character)
+
+    // Returning player
+    if (characterFromServer) {
+      return alert(JSON.stringify(character))
+    }
+
+    // New player. Move on to character creation screen.
+    this.props.advanceScreen()
   }
 
   onBlur() {
