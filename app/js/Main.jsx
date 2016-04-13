@@ -18,7 +18,7 @@ class Main extends React.Component {
   constructor(props) {
     super(props)
 
-    window.IS_ELECTRON = window.location.search.endsWith('electron')
+    window.IS_ELECTRON = window.location.search.includes('electron')
 
     this.state = this.initialState = {
       screen: 0,
