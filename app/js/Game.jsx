@@ -3,8 +3,11 @@ const RACES = ['Human', 'Dwarf', 'Elf']
 const STATS = ['strength', 'wisdom', 'dexterity']
 const MAX_LEVEL = 8
 const DRAGONSLAYER_LEVEL = 4
-// const api_base = 'http://api.ExileFromMorewood.com'
-const api_base = 'http://localhost:8000'
+
+let api_base = 'http://api.ExileFromMorewood.com'
+if (!window.IS_ELECTRON) {
+  api_base = 'http://localhost:8000'
+}
 
 function rollDie() {
    return Math.floor(Math.random() * 20) + 1

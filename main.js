@@ -24,7 +24,7 @@ app.on('ready', function() {
   mainWindow.setMenu(null);
 
   // Load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/build' + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/build' + '/index.html?electron');
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
