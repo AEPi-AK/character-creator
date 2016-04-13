@@ -16,7 +16,7 @@ import '../less/Main.less'
 class Main extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = this.initialState = {
       screen: 0,
       isLoading: false,
@@ -52,7 +52,7 @@ class Main extends React.Component {
   }
 
   restart() {
-    this.setState(this.initialState);
+    this.setState(this.initialState)
   }
 
   render() {

@@ -7,9 +7,9 @@ import '../less/RaceScreen.less'
 class RaceScreen extends React.Component {
 
   setRace(name) {
-    this.props.character.race = name;
-    this.props.setCharacter(this.props.character);
-    this.props.advanceScreen();
+    this.props.character.race = name
+    this.props.setCharacter(this.props.character)
+    this.props.advanceScreen()
   }
 
   render() {

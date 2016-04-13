@@ -7,7 +7,7 @@ import '../less/StatsScreen.less'
 class Cube extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       face: 20,
       rolled: false,
@@ -15,10 +15,10 @@ class Cube extends React.Component {
   }
 
   roll() {
-    this.setState({face: rollDie()});
+    this.setState({face: rollDie()})
     setTimeout(() => {
       this.setState({rolled: true})
-      this.refs.value.className += ' zoomIn';
+      this.refs.value.className += ' zoomIn'
     }, 1000)
   }
 
@@ -64,7 +64,7 @@ class Cube extends React.Component {
 class StatsScreen extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       rolled: false,
       rolling: false,
@@ -75,23 +75,23 @@ class StatsScreen extends React.Component {
     STATS.map((stat, i) => {
       setTimeout(() => this.refs['cube' + i].roll(), 1500 * i)
     })
-    this.setState({rolled: true, rolling: true});
+    this.setState({rolled: true, rolling: true})
     setTimeout(() => this.setState({rolling: false}), 1500 * STATS.length)
   }
 
   onClick() {
     if (this.state.rolled && !this.state.rolling) {
-      this.props.character.strength = this.refs.cube0.state.face;
-      this.props.character.wisdom = this.refs.cube1.state.face;
-      this.props.character.dexterity = this.refs.cube2.state.face;
-      this.props.setCharacter(this.props.character);
-      this.props.advanceScreen();
+      this.props.character.strength = this.refs.cube0.state.face
+      this.props.character.wisdom = this.refs.cube1.state.face
+      this.props.character.dexterity = this.refs.cube2.state.face
+      this.props.setCharacter(this.props.character)
+      this.props.advanceScreen()
     }
     else if (this.state.rolled && this.state.rolling) {
       console.log('already rolling...')
     }
     else {
-      this.rollAll();
+      this.rollAll()
     }
   }
 
@@ -99,20 +99,20 @@ class StatsScreen extends React.Component {
     const cubes = STATS.map((stat, i) => {
       return <Cube key={i} ref={'cube' + i} leftOffset={250 * i} name={stat}/>
     })
-    let titleText;
-    let cta = false;
+    let titleText
+    let cta = false
     if (this.state.rolled && !this.state.rolling) {
       titleText = 'Tap To Continue'
-      cta = true;
+      cta = true
     }
     else if (this.state.rolled && this.state.rolling) {
       titleText = 'Rolling...'
     } else {
       titleText = 'Tap To Roll For Stats'
-      cta = true;
+      cta = true
     }
     const classes = classNames('title', {cta})
-    const readyForNextScreen = this.state.rolled && !this.state.rolling;
+    const readyForNextScreen = this.state.rolled && !this.state.rolling
     return (
       <div className='stats-container' onClick={this.onClick.bind(this)}>
         <div ref='title' className={classes}>{titleText}</div>
