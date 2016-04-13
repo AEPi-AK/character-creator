@@ -3,7 +3,17 @@ import ReactDOM from 'react-dom'
 
 import '../less/Scanner.less'
 
+const REFOCUS_INTERVAL = 250
+
 class Scanner extends React.Component {
+
+  componentDidMount() {
+    this.timer = setInterval(() => this.refs.input.focus(), REFOCUS_INTERVAL)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
 
   onKeyUp(e) {
     // Only when the return key is pressed

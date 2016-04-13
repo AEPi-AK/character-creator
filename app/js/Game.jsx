@@ -8,6 +8,7 @@ let api_base = 'http://api.ExileFromMorewood.com'
 if (!window.IS_ELECTRON) {
   api_base = 'http://localhost:8000'
 }
+console.info('api_base = ', api_base)
 
 function rollDie() {
    return Math.floor(Math.random() * 20) + 1
