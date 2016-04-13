@@ -39,7 +39,7 @@ class ScanScreen extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='scan-container'>
         <input
           type='text'
           ref='scanner'
@@ -47,12 +47,12 @@ class ScanScreen extends React.Component {
           autoFocus={true}
           onBlur={this.onBlur.bind(this)}
         />
-        <div className='scan-title'>Welcome, brave adventurer!</div>
-        <div className='scan-cta'>scan card to continue</div>
-        <div className='scan-card-container'>
-          <img className='scan-card' src='static/img/id_pitt.png'/>
-          <img className='scan-card' src='static/img/id_cmu.png'/>
-          <div className='scan-help'>If you do not have a Student ID, ask a booth attendant and we will provide you with a scannable card.</div>
+        <div className='header'>Welcome, brave adventurer!</div>
+        <div className='cta'>scan card to continue</div>
+        <div className='id-card-container'>
+          <img className='id-card' src='static/img/id_pitt.png'/>
+          <img className='id-card' src='static/img/id_cmu.png'/>
+          <div className='id-card-help'>If you do not have a Student ID, ask a booth attendant and we will provide you with a scannable card.</div>
         </div>
       </div>
     )

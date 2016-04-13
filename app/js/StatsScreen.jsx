@@ -111,10 +111,10 @@ class StatsScreen extends React.Component {
       titleText = 'Tap To Roll For Stats'
       cta = true;
     }
-    const classes = classNames('stats-title', {cta})
+    const classes = classNames('title', {cta})
     const readyForNextScreen = this.state.rolled && !this.state.rolling;
     return (
-      <div onClick={this.onClick.bind(this)}>
+      <div className='stats-container' onClick={this.onClick.bind(this)}>
         <div ref='title' className={classes}>{titleText}</div>
         {cubes}
       </div>

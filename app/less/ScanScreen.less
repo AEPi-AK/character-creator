@@ -1,47 +1,50 @@
 @import './Base.less';
 
-.scan-title {
-  font-family: 'Fell Italic';
-  font-size: 50px;
-  margin-top: 30px;
-}
+.scan-container {
 
-.scan-cta {
-  .pulsate;
-  font-family: 'Fell SC';
-  font-size: 54px;
-  color: @red;
-  margin-bottom: 15px;
-}
+  // ( ͡° ͜ʖ ͡°)
+  input {
+    height: 0;
+    width: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 
-.scan-help {
-  font-size: 20px;
-  max-width: 472px;
-  margin: 0 auto;
-  margin-top: 10px;
-}
+  .header {
+    font-family: 'Fell Italic';
+    font-size: 50px;
+    margin-top: 30px;
+  }
 
-.scan-card-container {
-  width: 610px;
-  height: 245px;
-  background: @bg-panel;
-  border-radius: 8px;
-  margin: 0 auto;
-  padding-top: 10px;
+  .cta {
+    font-size: 54px;
+    margin-bottom: 15px;
+  }
 
- > img {
-  margin: 10px;
- }
-}
+  .id-card-container {
 
-// ( ͡° ͜ʖ ͡°)
-input {
-  height: 0;
-  width: 0;
-  border: 0;
-  outline: none;
-  background: transparent;
-  position: absolute;
-  top: 0;
-  left: 0;
+    width: 610px;
+    height: 245px;
+    background: @bg-panel;
+    border-radius: 8px;
+    margin: 0 auto;
+    padding-top: 10px;
+
+     > img {
+      margin: 10px;
+     }
+
+     .id-help {
+       font-size: 20px;
+       max-width: 472px;
+       margin: 0 auto;
+       margin-top: 10px;
+     }
+
+  }
+
 }

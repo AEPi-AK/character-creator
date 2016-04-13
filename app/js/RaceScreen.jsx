@@ -6,13 +6,6 @@ import '../less/RaceScreen.less'
 
 class RaceScreen extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      race: null,
-    }
-  }
-
   setRace(name) {
     this.props.character.race = name;
     this.props.setCharacter(this.props.character);
@@ -20,18 +13,16 @@ class RaceScreen extends React.Component {
   }
 
   render() {
-      const races = RACES.map((name, i) => {
-        return (
-          <div className='race-card' key={i} onClick={this.setRace.bind(this, name)}>
-            <img src={`static/img/${name}.png`}/>
-            <div>{name}</div>
-          </div>
-        )
-      })
       return (
         <div className='race-container'>
-          <div className='race-title'>Choose a Race</div>
-          {races}
+          <div className='title'>Choose a Race</div>
+          {RACES.map((name, i) => (
+            <div className='card' key={i} onClick={this.setRace.bind(this, name)}>
+              <img src={`static/img/${name}.png`}/>
+              <div>{name}</div>
+            </div>
+            )
+          )}
         </div>
       )
     }

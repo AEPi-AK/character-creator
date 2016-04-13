@@ -7,19 +7,19 @@ class FinishScreen extends React.Component {
   render() {
     const panels = [
       {
-        title: "do battle",
-        subtitle: "as you journey through the booth",
-        icon: "swords-yellow.svg",
+        title: 'do battle',
+        subtitle: 'as you journey through the booth',
+        icon: 'swords-yellow.svg',
       },
       {
-        title: "level up",
-        subtitle: "as you gain experience points",
-        icon: "levelup-yellow.svg",
+        title: 'level up',
+        subtitle: 'as you gain experience points',
+        icon: 'levelup-yellow.svg',
       },
       {
-        title: "return here",
-        subtitle: "to track your progress",
-        icon: "return-yellow.svg",
+        title: 'return here',
+        subtitle: 'to track your progress',
+        icon: 'return-yellow.svg',
       },
     ].map(({title, subtitle, icon}, i) => (
       <div className='panel-card' key={i}>
@@ -32,7 +32,7 @@ class FinishScreen extends React.Component {
     ))
 
     return (
-      <div className='container'>
+      <div className='finish-container'>
         <div className='title'>Adventure Awaits</div>
         {panels}
         <div className='finish-button' onClick={this.props.restart.bind(this)}>
