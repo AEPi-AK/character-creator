@@ -1,21 +1,22 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import sha256 from 'js-sha256'
 
+import Scanner from './Scanner.jsx'
 import { getCharacter } from './Game.jsx'
 
 import '../less/ScanScreen.less'
 
 class ScanScreen extends React.Component {
 
-  async onKeyUp(e) {
-    // Only when the return key is pressed
-    if (e.keyCode !== 13) return
+  constructor(props) {
+    super(props)
+  }
 
+  async onData(data) {
     let character = this.props.character
 
     // Value from the scanner
-    character.id = sha256(ReactDOM.findDOMNode(this.refs.scanner).value)
+    character.id = sha256(data)
 
     // Ask the server to look up a character with this scan data
     const characterFromServer = await getCharacter(character.id)
@@ -33,20 +34,10 @@ class ScanScreen extends React.Component {
     }
   }
 
-  onBlur() {
-    this.refs.scanner.focus()
-  }
-
   render() {
     return (
       <div className='scan-container'>
-        <input
-          type='text'
-          ref='scanner'
-          onKeyUp={this.onKeyUp.bind(this)}
-          autoFocus={true}
-          onBlur={this.onBlur.bind(this)}
-        />
+        <Scanner ref='scanner' onData={this.onData.bind(this)}/>
         <div className='header'>Welcome, brave adventurer!</div>
         <div className='cta'>scan card to continue</div>
         <div className='id-card-container'>

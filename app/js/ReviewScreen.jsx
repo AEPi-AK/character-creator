@@ -8,10 +8,8 @@ import '../less/ReviewScreen.less'
 class ReviewScreen extends React.Component {
 
   async componentWillMount() {
-    // this.props.setIsLoading(true)
-    // const character = await createCharacter(this.props.character)
-    const character = this.props.character
-    character.num = 1337
+    this.props.setIsLoading(true)
+    const character = await createCharacter(this.props.character)
     this.props.setCharacter(character)
   }
 
@@ -21,7 +19,7 @@ class ReviewScreen extends React.Component {
         <div className='title'>Your Character</div>
         <CharacterCard character={this.props.character}/>
         <div className='player-number'>
-          <div className='player-number-label'>Player No. {this.props.character.num}</div>
+          <div className='player-number-label'>Player No. {this.props.character.number}</div>
           <div className='player-number-help'>Write this number down to track your progress & view the leaderboard online!</div>
         </div>
         <div className='finish-button' onClick={this.props.advanceScreen}>

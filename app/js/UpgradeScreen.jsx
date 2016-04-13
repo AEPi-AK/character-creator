@@ -9,7 +9,7 @@ import '../less/UpgradeScreen.less'
 class UpgradeScreen extends React.Component {
 
   isEligible() {
-    return calculateLevel(this.props.character.experience) >= DRAGONSLAYER_LEVEL
+    return calculateLevel(this.props.character.points) >= DRAGONSLAYER_LEVEL
   }
 
   upgrade() {
@@ -39,7 +39,7 @@ class UpgradeScreen extends React.Component {
               Your character needs to be level 4 or higher to upgrade to a DragonSlayer card.
             </div>
         }
-        <div className='player-number'>Player No. {this.props.character.num}</div>
+        <div className='player-number'>Player No. {this.props.character.number}</div>
       </div>
     )
   }

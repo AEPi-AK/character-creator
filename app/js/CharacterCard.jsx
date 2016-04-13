@@ -25,11 +25,11 @@ class CharacterScreen extends React.Component {
         </div>
         <div className='character-card-stat-value-container'>
           {values}
-          <div className='character-card-stat-value'>{this.props.character.experience}</div>
+          <div className='character-card-stat-value'>{this.props.character.points}</div>
         </div>
         <div className='character-card-avatar'>
           <img src={`static/img/${this.props.character.race}.png`}/>
-          <div>Level: {calculateLevel(this.props.character.experience)} of {MAX_LEVEL}</div>
+          <div>Level: {calculateLevel(this.props.character.points)} of {MAX_LEVEL}</div>
         </div>
       </div>
     )

@@ -22,12 +22,12 @@ class Main extends React.Component {
       isLoading: false,
       character: {
         id: null,
+        points: 0,
+        number: 0,
         race: null,
         strength: 0,
         wisdom: 0,
         dexterity: 0,
-        experience: 0,
-        num: 0,
       }
     }
 
