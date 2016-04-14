@@ -54,13 +54,12 @@ class ForestMonster extends React.Component {
   }
 
   playerFromCharacter(character) {
-    let player = character
-    player.hp =
+    let player = {}
     player.level = calculateLevel(character.points)
     player.hp_max = calculateHp(character)
     player.hp = player.hp_max
     player.isDragonSlayer = player.level >= DRAGONSLAYER_LEVEL
-    player.color = toSet.isDragonSlayer ? 'red' : 'yellow'
+    player.color = player.isDragonSlayer ? 'red' : 'yellow'
     player.name = caracter.name
     player.race = character.race
     return player

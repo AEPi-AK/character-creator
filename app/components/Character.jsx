@@ -20,7 +20,7 @@ function calculateLevel(points) {
 }
 
 function calculateHp(player) {
-  return player.strength * level * 5
+  return player.strength * player.level * 5
 }
 
 function calculateDamage(entity) {

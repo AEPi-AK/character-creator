@@ -21,7 +21,7 @@ class PlayerCard extends React.Component {
     render() {
         return (
             <div className='player-card'>
-                <img src={this.props.player.picture}/>
+                <img src={`static/img/${this.props.player.race}.png`}/>
                 <div className='player-name'>{this.props.player.name}</div>
             </div>
         )
@@ -29,37 +29,26 @@ class PlayerCard extends React.Component {
 }
 
 class JoinBattleScreen extends React.Component {
-  
+
   render() {
       const monster = {
         name: 'Forest Gnoll',
         race: 'gnoll',
-      }  
+      }
 
       var numPlayers = 1;
-
-      const firstPlayer = {
-        name: 'Jordan',
-        picture: './static/img/Human.png',
-        
-      }
-
-      const secondPlayer = {
-        name: 'Avi',
-        picture: './static/img/Elf.png',
-      }
 
       var forestTitle = `ready to fight`
       var playerCardRight = <NoPlayerCard/>
       var playerCardLeft = <NoPlayerCard/>
 
       if (numPlayers>=1) {
-        playerCardRight = <PlayerCard player={firstPlayer}/>
+        playerCardLeft = <PlayerCard player={this.props.player}/>
         forestTitle = "active battle"
       }
 
       if (numPlayers==2) {
-        playerCardLeft = <PlayerCard player={secondPlayer}/>
+        playerCardRight = <PlayerCard player={this.props.player}/>
         forestTitle = "active battle"
       }
 
@@ -72,7 +61,7 @@ class JoinBattleScreen extends React.Component {
                     <img src={`static/img/${monster.race}.png`}/>
                     <div className='monster-name'>{monster.name}</div>
                 </div>
-                {playerCardRight} 
+                {playerCardRight}
             </div>
         </div>
       )
