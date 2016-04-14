@@ -43,10 +43,6 @@ async function createCharacter(character) {
     return await response.json()
   }
 
-  if (response.status == 200) { // XXX: This shouldn't be the status code!
-    return await response.json()
-  }
-
   throw response
 }
 
