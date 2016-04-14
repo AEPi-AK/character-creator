@@ -14,12 +14,14 @@ class ScanScreen extends React.Component {
     // Value from the scanner
     character.id = sha256(data)
 
+    this.props.setIsLoading(true)
     // Ask the server to look up a character with this scan data
     const characterFromServer = await getCharacter(character.id)
     if (characterFromServer != null) {
       character = characterFromServer
     }
     this.props.setCharacter(character)
+    this.props.setIsLoading(false)
 
     if (characterFromServer) {
       // Returning character; continue to UpgradeScreen
