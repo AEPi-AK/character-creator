@@ -33,7 +33,7 @@ class CharacterScreen extends React.Component {
         }
         <div className='character-card-stat-label-container'>
           {labels}
-          <div className='character-card-stat-label'>XP points</div>
+          <div className='character-card-stat-label'>Exp points</div>
         </div>
         <div className='character-card-stat-value-container'>
           {values}
