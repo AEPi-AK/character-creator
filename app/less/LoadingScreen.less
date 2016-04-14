@@ -2,23 +2,8 @@
 
 @spinner-size: 100px;
 
-body {
-  background-color: @bg;
-  color: @yellow;
-  margin: 0;
-  font-family: 'Fell';
-  overflow: hidden;
-  user-select: none;
-}
-
-.screen {
-  border: 1px solid black;
-  width: @app-width;
-  height: @app-height;
-  text-align: center;
-}
-
 .screen-loading {
+
   position: absolute;
   top: (@app-height - @spinner-size) / 2;
   left: (@app-width - @spinner-size) / 2;
@@ -31,7 +16,7 @@ body {
     background-color: @yellow;
   }
 
-  .loading-restart {
+  .loading-try-again {
     margin-top: 50px;
     padding: 15px 30px;
     font-size: 30px;
@@ -44,5 +29,6 @@ body {
     to {
       opacity: 1.0;
     }
-}
+  }
+
 }

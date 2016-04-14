@@ -23,8 +23,11 @@ app.on('ready', function() {
   // Hide Menu bar
   mainWindow.setMenu(null);
 
+  app_mode = process.env.BOOTH_APP_MODE
+  console.log('app mode:', app_mode)
+
   // Load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/build' + '/index.html?electron');
+  mainWindow.loadURL('file://' + __dirname + '/build' + '/index.html?electron&mode=' + app_mode);
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

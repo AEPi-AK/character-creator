@@ -1,94 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Spinner from 'react-spinkit'
 
-import SplashScreen from './SplashScreen.jsx'
-import ScanScreen from './ScanScreen.jsx'
-import CreateScreen from './CreateScreen.jsx'
-import RaceScreen from './RaceScreen.jsx'
-import StatsScreen from './StatsScreen.jsx'
-import ReviewScreen from './ReviewScreen.jsx'
-import FinishScreen from './FinishScreen.jsx'
-import ProfileScreen from './ProfileScreen.jsx'
+import Tavern from './Tavern.jsx'
 import CrashScreen from './CrashScreen.jsx'
 
-import '../less/Main.less'
-
-class Main extends React.Component {
-
-  constructor(props) {
-    super(props)
-
-    this.state = this.initialState = {
-      screen: 0,
-      isLoading: false,
-      character: {
-        id: null,
-        points: 0,
-        number: 0,
-        race: null,
-        strength: 0,
-        wisdom: 0,
-        dexterity: 0,
-      }
-    }
-
-    this.screens = [
-      SplashScreen,
-      ScanScreen,
-      CreateScreen,
-      RaceScreen,
-      StatsScreen,
-      ReviewScreen,
-      FinishScreen,
-      ProfileScreen,
-      CrashScreen,
-    ].map(component => React.createFactory(component))
-  }
-
-  advanceScreen(index) {
-    if (typeof index === 'number') {
-      this.setState({screen: index})
-    } else {
-      this.setState({screen: this.state.screen + 1})
-    }
-  }
-
-  restart() {
-    this.setState(this.initialState)
-  }
-
-  render() {
-    if (this.state.isLoading) {
-      return (
-        <div className='screen-loading'>
-          <Spinner noFadeIn={true} spinnerName='circle'/>
-          <div className='button loading-restart' onClick={this.restart.bind(this)}>
-            <div>Try Again?</div>
-          </div>
-        </div>
-      )
-    }
-    const screens = this.screens.map(screen => screen({
-      restart: this.restart.bind(this),
-      advanceScreen: this.advanceScreen.bind(this),
-      setCharacter: character => this.setState({character}),
-      setIsLoading: isLoading => this.setState({isLoading}),
-      character: this.state.character,
-    }))
-    return (
-      <div className='screen'>
-        {screens[this.state.screen]}
-      </div>
-    )
-  }
-
-}
-
+// Trap all errors
 window.onerror = () => {
   ReactDOM.render(<CrashScreen/>, document.getElementById('root'))
 }
 
+// Monkeypatch console.log
 window.console.log = (str, ...strs) => {
   const msg = str + strs.join(' ')
   const node = window.document.getElementById('debug-console')
@@ -97,15 +18,7 @@ window.console.log = (str, ...strs) => {
   console.debug(msg)
 }
 
-window.IS_ELECTRON = window.location.search.includes('electron')
-window.API_BASE = 'http://api.ExileFromMorewood.com'
-if (!window.IS_ELECTRON) {
-  window.API_BASE = 'http://localhost:8000'
-}
-console.log('IS_ELECTRON = ', window.IS_ELECTRON)
-console.log('API_BASE = ', window.API_BASE)
-
-
+// Special tap-spam traps
 document.getElementById('debug-console').addEventListener('click', event => {
   const node = event.target
   if (!node.hasOwnProperty('isaacsucks')) {
@@ -137,5 +50,27 @@ document.getElementById('debug-console').addEventListener('click', event => {
     node.style.opacity = 1
   }
 })
+
+window.IS_ELECTRON = window.location.search.includes('electron')
+window.APP_MODE = window.location.search.split('mode=')[1]
+window.API_BASE = window.IS_ELECTRION ? 'http://api.ExileFromMorewood.com' : 'http://localhost:8000'
+
+console.log('IS_ELECTRON = ', window.IS_ELECTRON)
+console.log('APP_MODE = ', window.APP_MODE)
+console.log('API_BASE = ', window.API_BASE)
+
+class Main extends React.Component {
+
+  render() {
+    if (window.APP_MODE === 'tavern') {
+      return <Tavern/>
+    }
+    if (window.APP_MODE === 'forest') {
+      return <Forest/>
+    }
+    return <h1>Unknown app mode: {window.APP_MODE}</h1>
+  }
+
+}
 
 ReactDOM.render(<Main/>, document.getElementById('root'))
