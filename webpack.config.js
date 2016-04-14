@@ -6,7 +6,7 @@ var autoprefixer = require('autoprefixer');
 module.exports = {
   entry:  [
     'babel-polyfill',
-    './js/Main.jsx',
+    './components/Main.jsx',
   ],
 	context: path.join(__dirname, 'app'),
   plugins: [
