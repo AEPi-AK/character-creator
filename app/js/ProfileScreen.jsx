@@ -62,12 +62,7 @@ class ProfileScreen extends React.Component {
     character.pro_id = sha256(data)
 
     this.props.setIsLoading(true)
-    try {
-      await updateCharacter(character)
-    } catch (err) {
-      // TODO: FIXME
-      console.error(err)
-    }
+    await updateCharacter(character)
     this.props.setIsLoading(false)
 
     this.props.setCharacter(character)
