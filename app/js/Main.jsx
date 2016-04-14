@@ -56,28 +56,6 @@ class Main extends React.Component {
     this.setState(this.initialState)
   }
 
-  onTouchStart(event) {
-    const numFingers = event.changedTouches.length
-    console.log('numFingers = ', numFingers)
-    if (numFingers === 5) {
-      this.restart()
-    }
-    else if (numFingers === 8) {
-      const node = window.document.getElementById('debug-console')
-      if (window.DEBUG_MODE === true) {
-        console.log('debug mode disabled')
-        window.DEBUG_MODE = false
-        window.console.log = window.old_log
-        node.style.display = 'none'
-        return
-      }
-      console.log('debug mode enabled')
-      window.DEBUG_MODE = true
-      window.old_log = window.console.log
-      node.style.display = 'inline'
-    }
-  }
-
   render() {
     if (this.state.isLoading) {
       return (
@@ -97,7 +75,7 @@ class Main extends React.Component {
       character: this.state.character,
     }))
     return (
-      <div className='screen' onTouchStart={this.onTouchStart.bind(this)}>
+      <div className='screen'>
         {screens[this.state.screen]}
       </div>
     )
@@ -121,5 +99,36 @@ if (!window.IS_ELECTRON) {
 console.log('IS_ELECTRON = ', window.IS_ELECTRON)
 console.log('API_BASE = ', window.API_BASE)
 
+
+document.getElementById('debug-console').addEventListener('click', event => {
+  const node = event.target
+  if (!node.hasOwnProperty('isaacsucks')) {
+    node.isaacsucks = {
+      timer: null,
+      counter: 0,
+    }
+  }
+  clearTimeout(node.isaacsucks.timer)
+  node.isaacsucks.counter += 1
+  node.isaacsucks.timer = setTimeout(() => {
+    node.isaacsucks.counter = 0
+  }, 750)
+  if (node.isaacsucks.counter >= 7) {
+    if (event.clientX >= 250) {
+      return window.location.reload()
+    }
+    if (window.DEBUG_MODE === true) {
+      console.log('debug mode disabled')
+      window.DEBUG_MODE = false
+      window.console.log = window.old_log
+      node.style.opacity = 0
+      return
+    }
+    console.log('debug mode enabled')
+    window.DEBUG_MODE = true
+    window.old_log = window.console.log
+    node.style.opacity = 1
+  }
+})
 
 ReactDOM.render(<Main/>, document.getElementById('root'))
