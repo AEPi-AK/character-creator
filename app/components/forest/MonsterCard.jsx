@@ -19,7 +19,8 @@ class MonsterCard extends React.Component {
         <HealthBar color={monster.color} current={monster.hp} total={monster.hp_max}/>
       </div>
     )
-    }
+  }
+  
 }
 
 export default MonsterCard
