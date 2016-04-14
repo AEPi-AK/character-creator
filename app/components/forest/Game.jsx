@@ -1,7 +1,9 @@
 import 'whatwg-fetch'
 
+import { rollDie } from '../Character.jsx'
+
 // Adds a player, returns state
-async function helloPlayer(player) {
+async function helloPlayer(player, number) {
   console.log('helloPlayer()')
   const response = await fetch(window.GAME_BASE + '/hello', {
     method: 'POST',
@@ -13,6 +15,7 @@ async function helloPlayer(player) {
       player: {
         id: player.id,
         hitpoints: 100,
+        player_number: number,
       }
     }),
   })
@@ -102,10 +105,33 @@ async function poll(identifier) {
   throw response
 }
 
+const MONSTERS = [
+  {
+    race: 'gnoll',
+    name: 'Forest Gnoll',
+    hp: 300,
+    hp_max: 300,
+    level: 3,
+    color: 'green-light',
+  },
+  {
+    race: 'hill-giant',
+    name: 'Hill Giant',
+    hp: 500,
+    hp_max: 400,
+    level: 5,
+    color: 'green-light',
+  }
+]
+
+function getRandomMonster() {
+  return MONSTERS[Math.floor(Math.random() * 10) % MONSTERS.length]
+}
 
 export {
   helloPlayer,
   helloMonster,
   attack,
   poll,
+  getRandomMonster,
 }

@@ -19,6 +19,18 @@ function calculateLevel(points) {
   return 8
 }
 
+function calculateHp(player) {
+  return player.strength * level * 5
+}
+
+function calculateDamage(entity) {
+  const d20 = rollDie()
+  if (entity.hasOwnProperty('strength')) {
+    return d20 * (entity.strength + entity.level)
+  }
+  return d20 * entity.level
+}
+
 async function getCharacter(identifier) {
   console.log(`getCharacter(${identifier})`)
   const response = await fetch(window.API_BASE + `/characters/${identifier}`)
@@ -75,6 +87,8 @@ export {
   DRAGONSLAYER_LEVEL,
   rollDie,
   calculateLevel,
+  calculateHp,
+  calculateDamage,
   getCharacter,
   createCharacter,
   updateCharacter,

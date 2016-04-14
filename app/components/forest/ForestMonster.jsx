@@ -2,12 +2,13 @@ import React from 'react'
 
 import PlayerCard from './PlayerCard.jsx'
 import MonsterCard from './MonsterCard.jsx'
-import { calculateLevel } from '../Character.jsx'
-import { helloMonster, attack, poll } from './Game.jsx'
+import { helloMonster, attack, poll, getRandomMonster } from './Game.jsx'
+import { DRAGONSLAYER_LEVEL, calculateLevel, calculateHp, calculateDamage, getCharacter, updateCharacter } from '../Character.jsx'
 
 import './ForestMonster.less'
 
 const POLL_INTERVAL = 1000
+const TIME_TO_RESTART = 4000
 
 class BattleText extends React.Component {
 
@@ -48,23 +49,45 @@ class ForestMonster extends React.Component {
         color: 'yellow',
         isDragonSlayer: true,
       },
-      monster: {
-        race: 'gnoll',
-        name: 'Forest Gnoll',
-        hp: 330,
-        hp_max: 500,
-        level: 9,
-        color: 'green-light',
-      },
+      monster: null
     }
   }
 
-  updateFromState(gameState) {
+  playerFromCharacter(character) {
+    let player = character
+    player.hp =
+    player.level = calculateLevel(character.points)
+    player.hp_max = calculateHp(character)
+    player.hp = player.hp_max
+    player.isDragonSlayer = player.level >= DRAGONSLAYER_LEVEL
+    player.color = toSet.isDragonSlayer ? 'red' : 'yellow'
+    player.name = caracter.name
+    player.race = character.race
+    return player
+  }
+
+  async updateFromState(gameState) {
     let p1 = this.state.player1
     let p2 = this.state.player2
 
     p1.hp = gameState.player1.hitpoints
     p2.hp = gameState.player2.hitpoints
+
+    if (gameState.player1.id) {
+      if (gameState.player1.id != p1.id) {
+        p1 = this.playerFromCharacter(await getCharacter(p1.id))
+      }
+    } else {
+      p1 = null
+    }
+
+    if (gameState.player2.id) {
+      if (gameState.player2.id != p2.id) {
+        p2 = this.playerFromCharacter(await getCharacter(p2.id))
+      }
+    } else {
+      p2 = null
+    }
 
     // player has been damaged, animate whichever one has been damaged
     this.setState({
@@ -74,7 +97,16 @@ class ForestMonster extends React.Component {
 
     if (this.gameShouldEnd()) {
       this.stopPolling()
-      alert('game is over!!!!. pause polling. wait 5 seconds, then send new hello monster')
+      if (p1) {
+        p1.points += 50
+        const r = await updateCharacter(p1)
+      }
+      if (p2) {
+        p2.points += 50
+        const r = await updateCharacter(p2)
+      }
+      alert('Game Over! Players have been awarded 50 points. New game in 5 seconds.')
+      setTimeout(this.startNewGame.bind(this), TIME_TO_RESTART)
     }
   }
 
@@ -102,8 +134,11 @@ class ForestMonster extends React.Component {
   }
 
   async startNewGame() {
-    // TODO: randomly choose what monster i am
-    await helloMonster(this.state.monster)
+    const newMonster = getRandomMonster()
+    this.setState({
+      monster: newMonster,
+    })
+    return await helloMonster(newMonster)
   }
 
   async resumePolling() {
@@ -117,8 +152,7 @@ class ForestMonster extends React.Component {
         if (Math.random() > 0.5) {
           playerToAttack = this.state.player2
         }
-        // TODO: generate dmg based on stats
-        const dmg = 20
+        const dmg = calculateDamage(this.state.monster)
         const stateAfterAttack = await attack(playerToAttack, this.state.monster, dmg)
 
         this.updateFromState(stateAfterAttack)
@@ -136,7 +170,9 @@ class ForestMonster extends React.Component {
   }
 
   render() {
-        // <PlayerCard side={'left'} status={'attacking'} player={player1}/>
+    if (!this.state.monster) {
+      return <h1>loading</h1>
+    }
     return (
       <div className='forest-monster-container'>
         <PlayerCard side={'left'} status={''} player={this.state.player1}/>
@@ -145,7 +181,8 @@ class ForestMonster extends React.Component {
         <BattleText attacker={this.state.monster} defender={this.state.player1} attack={'Axe Slash'}/>
       </div>
     )
-    }
+  }
+
 }
 
 export default ForestMonster

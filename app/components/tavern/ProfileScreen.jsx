@@ -1,6 +1,5 @@
 import React from 'react'
 import classNames from 'classnames'
-import sha256 from 'js-sha256'
 
 import CharacterCard from '../CharacterCard.jsx'
 import Scanner from '../Scanner.jsx'
@@ -59,7 +58,7 @@ class ProfileScreen extends React.Component {
     let character = this.props.character
 
     // Value from the scanner
-    character.pro_id = sha256(data)
+    character.pro_id = data
 
     this.props.setIsLoading(true)
     await updateCharacter(character)

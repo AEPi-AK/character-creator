@@ -1,5 +1,4 @@
 import React from 'react'
-import sha256 from 'js-sha256'
 
 import Scanner from './Scanner.jsx'
 import { getCharacter } from './Character.jsx'
@@ -12,7 +11,7 @@ class ScanScreen extends React.Component {
     let character = this.props.character
 
     // Value from the scanner
-    character.id = sha256(data)
+    character.id = data
 
     this.props.setIsLoading(true)
     // Ask the server to look up a character with this scan data
