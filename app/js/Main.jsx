@@ -83,7 +83,9 @@ class Main extends React.Component {
       return (
         <div className='screen-loading'>
           <Spinner noFadeIn={true} spinnerName='circle'/>
-          <button onClick={this.restart.bind(this)}>restart</button>
+          <div className='button loading-restart' onClick={this.restart.bind(this)}>
+            <div>Try Again?</div>
+          </div>
         </div>
       )
     }

@@ -30,4 +30,19 @@ body {
   .circle::before {
     background-color: @yellow;
   }
+
+  .loading-restart {
+    margin-top: 50px;
+    padding: 15px 30px;
+    font-size: 30px;
+    margin-left: -40px;
+    animation: showUp 0s ease-in 3s forwards;
+    opacity: 0;
+  }
+
+  @keyframes showUp {
+    to {
+      opacity: 1.0;
+    }
+}
 }
