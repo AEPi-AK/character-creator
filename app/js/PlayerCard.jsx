@@ -1,6 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
 
+import HealthBar from './HealthBar.jsx'
+
 import '../less/PlayerCard.less'
 
 class PlayerCard extends React.Component {
@@ -24,6 +26,7 @@ class PlayerCard extends React.Component {
         </div>
         <div className='exp'>{player.points} exp</div>
         <div className='level'>Level {player.level}</div>
+        <HealthBar color={player.color} current={player.hp} total={player.hp_max}/>
       </div>
     )
     }
