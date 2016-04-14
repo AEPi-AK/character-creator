@@ -2,6 +2,7 @@ import React from 'react'
 
 import PlayerCard from './PlayerCard.jsx'
 import MonsterCard from './MonsterCard.jsx'
+import { calculateLevel } from './Game.jsx'
 
 import '../less/ForestMonster.less'
 
@@ -19,7 +20,6 @@ class BattleText extends React.Component {
 
 }
 
-
 class ForestMonster extends React.Component {
 
   render() {
@@ -28,9 +28,20 @@ class ForestMonster extends React.Component {
       name: 'Player 98',
       hp: 49,
       hp_max: 110,
-      level: 3,
+      level: calculateLevel(15),
       points: 15,
-      color: 'yellow'
+      color: 'yellow',
+      isDragonSlayer: false,
+    }
+    const player2 = {
+      race: 'Elf',
+      name: 'Player 33',
+      hp: 49,
+      hp_max: 300,
+      level: calculateLevel(999),
+      points: 999,
+      color: 'yellow',
+      isDragonSlayer: true,
     }
     const monster = {
       race: 'gnoll',
@@ -38,12 +49,14 @@ class ForestMonster extends React.Component {
       hp: 330,
       hp_max: 500,
       level: 9,
-      color: 'green-light'
+      color: 'green-light',
     }
-    // <PlayerCard side={'left'}/>
+        // <PlayerCard side={'left'} status={'attacking'} player={player1}/>
     return (
       <div className='forest-monster-container'>
-        <MonsterCard monster={monster}/>
+         <PlayerCard side={'left'} status={'attacking'} player={player1}/>
+        <PlayerCard side={'right'}/>
+        <MonsterCard status={'defending'} monster={monster}/>
         <BattleText attacker={monster} defender={player1} attack={'Axe Slash'}/>
       </div>
     )

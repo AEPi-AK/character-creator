@@ -1,16 +1,31 @@
 import React from 'react'
+import classNames from 'classnames'
 
-// import '../less/RaceScreen.less'
+import '../less/PlayerCard.less'
 
 class PlayerCard extends React.Component {
 
   render() {
-      return (
-        <div className='player-card-container'>
-          <img src={`static/img/Human.png`}/>
-          <div>Level: ?</div>
+    const player = this.props.player
+    const sideClass = `side-${this.props.side}`
+    if (!player) {
+      return <div className={`player-card-container empty ${sideClass}`}/>
+    }
+    const classes = classNames(
+      'player-card-container',
+      sideClass,
+      {dragonslayer: player.isDragonSlayer},
+    )
+    return (
+      <div className={classes}>
+        <div className='status'>{this.props.status}</div>
+        <div className='img-container'>
+          <img src={`static/img/${player.race}.png`}/>
         </div>
-      )
+        <div className='exp'>{player.points} exp</div>
+        <div className='level'>Level {player.level}</div>
+      </div>
+    )
     }
 }
 
