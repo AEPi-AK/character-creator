@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import Tavern from './Tavern.jsx'
+import ForestPlayer from './ForestPlayer.jsx'
+import ForestMonster from './ForestMonster.jsx'
 import CrashScreen from './CrashScreen.jsx'
 
 // Trap all errors
@@ -65,8 +67,11 @@ class Main extends React.Component {
     if (window.APP_MODE === 'tavern') {
       return <Tavern/>
     }
-    if (window.APP_MODE === 'forest') {
-      return <Forest/>
+    if (window.APP_MODE === 'forest-player') {
+      return <ForestPlayer/>
+    }
+    if (window.APP_MODE === 'forest-monster') {
+      return <ForestMonster/>
     }
     return <h1>Unknown app mode: {window.APP_MODE}</h1>
   }
