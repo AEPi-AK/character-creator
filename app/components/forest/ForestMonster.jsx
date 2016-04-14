@@ -177,7 +177,7 @@ class ForestMonster extends React.Component {
       <div className='forest-monster-container'>
         <PlayerCard side={'left'} status={''} player={this.state.player1}/>
         <PlayerCard side={'right'} status={''} player={this.state.player2}/>
-        <MonsterCard status={'defending'} monster={this.state.monster}/>
+        <MonsterCard status={''} monster={this.state.monster}/>
         <BattleText attacker={this.state.monster} defender={this.state.player1} attack={'Axe Slash'}/>
       </div>
     )
