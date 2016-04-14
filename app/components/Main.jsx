@@ -55,7 +55,7 @@ document.getElementById('debug-console').addEventListener('click', event => {
 
 window.IS_ELECTRON = window.location.search.includes('electron')
 window.APP_MODE = window.location.search.split('mode=')[1]
-window.API_BASE = window.IS_ELECTRION ? 'http://api.ExileFromMorewood.com' : 'http://localhost:8000'
+window.API_BASE = window.IS_ELECTRON ? 'http://api.ExileFromMorewood.com' : 'http://localhost:8000'
 
 console.log('IS_ELECTRON = ', window.IS_ELECTRON)
 console.log('APP_MODE = ', window.APP_MODE)
