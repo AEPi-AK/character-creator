@@ -20,6 +20,7 @@ class PlayerCard extends React.Component {
     )
     return (
       <div className={classes}>
+        <div className='name'>{player.name}</div>
         <div className='status'>{this.props.status}</div>
         <div className='img-container'>
           <img src={`static/img/${player.race}.png`}/>
