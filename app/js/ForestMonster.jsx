@@ -2,7 +2,7 @@ import React from 'react'
 
 import PlayerCard from './PlayerCard.jsx'
 import MonsterCard from './MonsterCard.jsx'
-import { calculateLevel } from './Game.jsx'
+import { calculateLevel } from './Character.jsx'
 
 import '../less/ForestMonster.less'
 

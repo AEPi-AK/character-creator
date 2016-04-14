@@ -4,7 +4,7 @@ import sha256 from 'js-sha256'
 
 import CharacterCard from './CharacterCard.jsx'
 import Scanner from './Scanner.jsx'
-import { updateCharacter, calculateLevel, DRAGONSLAYER_LEVEL } from './Game.jsx'
+import { updateCharacter, calculateLevel, DRAGONSLAYER_LEVEL } from './Character.jsx'
 
 import '../less/ProfileScreen.less'
 import '../less/UpgradeScreen.less'

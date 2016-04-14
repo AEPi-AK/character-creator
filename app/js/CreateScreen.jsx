@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { STATS, RACES, rollDie } from './Game.jsx'
+import { STATS, RACES, rollDie } from './Character.jsx'
 
 import '../less/CreateScreen.less'
 

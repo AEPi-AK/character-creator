@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { STATS, rollDie } from './Game.jsx'
+import { STATS, rollDie } from './Character.jsx'
 
 import '../less/StatsScreen.less'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import CharacterCard from './CharacterCard.jsx'
-import { createCharacter, STATS, MAX_LEVEL } from './Game.jsx'
+import { createCharacter, STATS, MAX_LEVEL } from './Character.jsx'
 
 import '../less/ReviewScreen.less'
 

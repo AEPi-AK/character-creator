@@ -2,7 +2,7 @@ import React from 'react'
 import sha256 from 'js-sha256'
 
 import Scanner from './Scanner.jsx'
-import { getCharacter } from './Game.jsx'
+import { getCharacter } from './Character.jsx'
 
 import '../less/ScanScreen.less'
 

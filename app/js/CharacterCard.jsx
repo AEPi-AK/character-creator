@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 
-import { calculateLevel, STATS, DRAGONSLAYER_LEVEL, MAX_LEVEL } from './Game.jsx'
+import { calculateLevel, STATS, DRAGONSLAYER_LEVEL, MAX_LEVEL } from './Character.jsx'
 
 import '../less/CharacterCard.less'
 

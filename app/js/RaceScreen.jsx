@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { RACES } from './Game.jsx'
+import { RACES } from './Character.jsx'
 
 import '../less/RaceScreen.less'
 
