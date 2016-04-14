@@ -2,83 +2,44 @@ import React from 'react'
 
 import SplashScreen from '../SplashScreen.jsx'
 import ScanScreen from '../ScanScreen.jsx'
-import MonsterCard from './MonsterCard.jsx'
 
-import './ForestPlayer.less'
-
-class NoPlayerCard extends React.Component {
-
-    render() {
-        return (
-            <div className='no-player-card'>
-                <div className='join-text'>join battle</div>
-            </div>
-        )
-    }
-}
-
-class PlayerCard extends React.Component {
-
-    render() {
-        return (
-            <div className='player-card'>
-                <img src={this.props.player.picture}/>
-                <div className='player-name'>{this.props.player.name}</div>
-            </div>
-        )
-    }
-}
+import JoinBattleScreen from './JoinBattleScreen.jsx'
+import ChooseAttackScreen from './ChooseAttackScreen.jsx'
+import AttackingScreen from './AttackingScreen.jsx'
+import DefeatedMonsterScreen from './DefeatedMonsterScreen.jsx'
+import PlayerDiedScreen from './PlayerDiedScreen.jsx'
 
 class ForestPlayer extends React.Component {
 
-  render() {
-      const monster = {
-        name: 'Forest Gnoll',
-        race: 'gnoll',
-      }  
+    constructor(props) {
+        super(props)
+        this.state = {
+            screen: 0,
+        }
 
-      var numPlayers = 0;
+        this.screens = [
+            JoinBattleScreen,
+            ChooseAttackScreen,
+            AttackingScreen,
+            DefeatedMonsterScreen,
+            PlayerDiedScreen,
+        ].map(component => React.createFactory(component))
+    }
 
-      const firstPlayer = {
-        name: 'Jordan',
-        picture: './static/img/Human.png',
-        
-      }
+    setScreen(index) {
+        this.setState({screen: index})
+    }
 
-      const secondPlayer = {
-        name: 'Avi',
-        picture: './static/img/Elf.png',
-      }
+    render() {
+        const screens = this.screens.map(screen => screen({
+          setScreen: this.setScreen.bind(this),
+        }))
 
-      var forestTitle = `ready to fight`
-      var playerCardRight = <NoPlayerCard/>
-      var playerCardLeft = <NoPlayerCard/>
-
-      if (numPlayers>=1) {
-        playerCardRight = <PlayerCard player={firstPlayer}/>
-        forestTitle = "active battle"
-      }
-
-      if (numPlayers==2) {
-        playerCardLeft = <PlayerCard player={secondPlayer}/>
-        forestTitle = "active battle"
-      }
-
-
-
-      return (
-        <div className='forest-player-container'>
-            <div className='forest-title'>{forestTitle}</div>
-            <div className='card-container'>
-                {playerCardLeft}
-                <div className='monster-card'>
-                    <img src={`static/img/${monster.race}.png`}/>
-                    <div className='monster-name'>{monster.name}</div>
-                </div>
-                {playerCardRight} 
+        return (
+            <div className='screen'>
+                {screens[this.state.screen]}
             </div>
-        </div>
-      )
+        )
     }
 }
 
