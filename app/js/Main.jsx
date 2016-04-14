@@ -10,6 +10,7 @@ import StatsScreen from './StatsScreen.jsx'
 import ReviewScreen from './ReviewScreen.jsx'
 import FinishScreen from './FinishScreen.jsx'
 import ProfileScreen from './ProfileScreen.jsx'
+import CrashScreen from './CrashScreen.jsx'
 
 import '../less/Main.less'
 
@@ -41,6 +42,7 @@ class Main extends React.Component {
       ReviewScreen,
       FinishScreen,
       ProfileScreen,
+      CrashScreen,
     ].map(component => React.createFactory(component))
   }
 
@@ -83,6 +85,10 @@ class Main extends React.Component {
 
 }
 
+window.onerror = () => {
+  ReactDOM.render(<CrashScreen/>, document.getElementById('root'))
+}
+
 window.console.log = (str, ...strs) => {
   const msg = str + strs.join(' ')
   const node = window.document.getElementById('debug-console')
@@ -114,6 +120,7 @@ document.getElementById('debug-console').addEventListener('click', event => {
     node.isaacsucks.counter = 0
   }, 750)
   if (node.isaacsucks.counter >= 7) {
+    node.isaacsucks.counter = 0
     if (event.clientX >= 250) {
       return window.location.reload()
     }
