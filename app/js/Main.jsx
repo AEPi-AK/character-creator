@@ -57,12 +57,12 @@ class Main extends React.Component {
   }
 
   onTouchStart(event) {
-    const numFingers = event.touches.length
-    if (numFingers === 8) {
+    const numFingers = event.changedTouches.length
+    console.log('numFingers = ', numFingers)
+    if (numFingers === 5) {
       this.restart()
-      return
     }
-    if (numFingers === 8) {
+    else if (numFingers === 8) {
       const node = window.document.getElementById('debug-console')
       if (window.DEBUG_MODE === true) {
         console.log('debug mode disabled')
