@@ -4,12 +4,6 @@ const STATS = ['strength', 'wisdom', 'dexterity']
 const MAX_LEVEL = 8
 const DRAGONSLAYER_LEVEL = 4
 
-let api_base = 'http://api.ExileFromMorewood.com'
-if (!window.IS_ELECTRON) {
-  api_base = 'http://localhost:8000'
-}
-console.info('api_base = ', api_base)
-
 function rollDie() {
    return Math.floor(Math.random() * 20) + 1
 }
@@ -26,7 +20,8 @@ function calculateLevel(points) {
 }
 
 async function getCharacter(identifier) {
-  const response = await fetch(api_base + `/characters/${identifier}`)
+  console.log(`getCharacter(${identifier})`)
+  const response = await fetch(window.API_BASE + `/characters/${identifier}`)
   if (response.status == 404) { // not found
     return null
   }
@@ -34,7 +29,8 @@ async function getCharacter(identifier) {
 }
 
 async function createCharacter(character) {
-  const response = await fetch(api_base + '/characters/create', {
+  console.log('createCharacter')
+  const response = await fetch(window.API_BASE + '/characters/create', {
     method: 'POST',
     headers: {
      'Accept': 'application/json',
@@ -55,7 +51,8 @@ async function createCharacter(character) {
 }
 
 async function updateCharacter(character) {
-  const response = await fetch(api_base + '/characters/update', {
+  console.log('updateCharacter')
+  const response = await fetch(window.API_BASE + '/characters/update', {
     method: 'POST',
     headers: {
      'Accept': 'application/json',

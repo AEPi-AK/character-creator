@@ -3,8 +3,30 @@
 <head>
   <meta charset="utf-8">
   <title>Character Creator</title>
+  <style>
+    #debug-console {
+      color: white;
+      position: absolute;
+      top: -3px;
+      left: 0;
+      font-family: monospace;
+      width: 100%;
+      height: 140px;
+      padding-bottom: 2px;
+      background: rgba(0,0,0,0.7);
+      border: 0 none;
+      resize: none;
+      outline: none;
+      color: white;
+      overflow: scroll;
+      z-index: 100000;
+      display: none;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
+  <textarea id="debug-console"></textarea>
   <div id="root"></div>
   <script type="text/javascript" src="app.js" charset="utf-8"></script>
 </body>
