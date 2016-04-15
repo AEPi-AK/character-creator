@@ -137,6 +137,7 @@ function playerFromCharacter(character) {
   let player = {}
   player.level = calculateLevel(character.points)
   player.hp_max = calculateHp(character)
+  player.points = character.points
   player.hp = player.hp_max
   player.isDragonSlayer = player.level >= DRAGONSLAYER_LEVEL
   player.color = player.isDragonSlayer ? 'red' : 'yellow'

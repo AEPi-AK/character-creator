@@ -1,8 +1,8 @@
+import _ from 'lodash'
 import React from 'react'
 
 import PlayerCard from './PlayerCard.jsx'
 import MonsterCard from './MonsterCard.jsx'
-import LoadingScreen from '../LoadingScreen.jsx'
 import { playerFromCharacter, helloMonster, attack, poll, getRandomMonster } from './Game.jsx'
 import { DRAGONSLAYER_LEVEL, calculateLevel, calculateHp, calculateDamage, getCharacter, updateCharacter } from '../Character.jsx'
 
@@ -29,16 +29,24 @@ class ForestMonster extends React.Component {
 
   constructor(props) {
     super(props)
+
     this.state = {
       isLoading: true,
+      description: null,
       player1: null,
       player2: null,
       monster: null
     }
+
+    this.pollTimer = null
+    this.gameIsEndinggameIsEnding = false
+    this.updateFromState = _.throttle(this._updateFromState, POLL_INTERVAL)
+
+    this.UPDATE_LOCK = true
   }
 
   async componentDidMount() {
-    await this.startNewGame()
+    await this.newGame()
     this.resumePolling()
   }
 
@@ -48,6 +56,12 @@ class ForestMonster extends React.Component {
 
   setIsLoading(isLoading) {
     this.setState({isLoading})
+  }
+
+  updateDescription() {
+    if (!this.playersInGame()) {
+      this.state.description = 'waiting for players'
+    }
   }
 
   playersInGame() {
@@ -82,7 +96,7 @@ class ForestMonster extends React.Component {
     return false
   }
 
-  async updateFromState(gameState) {
+  async _updateFromState(gameState) {
     console.log('updateFromState')
     console.log(gameState)
     let p1 = this.state.player1
@@ -118,22 +132,15 @@ class ForestMonster extends React.Component {
       monster,
     })
 
+    this.updateDescription()
+
     if (this.gameShouldEnd()) {
-      this.stopPolling()
-      if (p1) {
-        p1.points += 50
-        const r = await updateCharacter(p1)
-      }
-      if (p2) {
-        p2.points += 50
-        const r = await updateCharacter(p2)
-      }
-      alert('Game Over! Players have been awarded 50 points. New game in 5 seconds.')
-      setTimeout(this.startNewGame.bind(this), TIME_TO_RESTART)
+        await this.endGame()
     }
   }
 
-  async startNewGame() {
+  async newGame() {
+    this.gameIsEnding = false
     this.setIsLoading(true)
     const newMonster = getRandomMonster()
     this.setState({
@@ -143,9 +150,33 @@ class ForestMonster extends React.Component {
     this.setIsLoading(false)
   }
 
+  async endGame() {
+    if (this.gameIsEnding) return
+    this.gameIsEnding = true
+    this.stopPolling()
+
+    if (this.state.player1) {
+      this.state.player1.points += 50
+      await updateCharacter(this.state.player1)
+    }
+
+    if (this.state.player2) {
+      this.state.player2.points += 50
+      await updateCharacter(this.state.player2)
+    }
+
+    console.log('WHOA!')
+    this.setState({
+      description: 'Game Over! Players have been awarded 50 points. New game in 5 seconds.',
+    })
+
+    setTimeout(this.newGame.bind(this), TIME_TO_RESTART)
+  }
+
   async resumePolling() {
     this.stopPolling()
     this.pollTimer = setInterval(async () => {
+      if (this.gameIsEnding) return
       // check if monster has been hit, and display
       const {canAttack, gameState} = await poll(this.state.monster.id)
       this.updateFromState(gameState)
@@ -176,11 +207,7 @@ class ForestMonster extends React.Component {
 
   render() {
     if (this.state.isLoading) {
-      return <LoadingScreen/>
-    }
-    let description
-    if (!this.playersInGame()) {
-      description = 'waiting for players'
+      return <div className='description-text'>loading</div>
     }
     // <BattleText attacker={this.state.monster} defender={this.state.player1} attack={'Axe Slash'}/>
     return (
@@ -189,7 +216,7 @@ class ForestMonster extends React.Component {
         <PlayerCard side={'right'} status={''} player={this.state.player2}/>
         <MonsterCard status={''} monster={this.state.monster}/>
         <div className='description-text'>
-          {description}
+          {this.state.description}
         </div>
       </div>
     )

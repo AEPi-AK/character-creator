@@ -60,6 +60,7 @@ async function createCharacter(character) {
 
 async function updateCharacter(character) {
   console.log('updateCharacter')
+  console.log(character)
   const response = await fetch(window.API_BASE + '/characters/update', {
     method: 'POST',
     headers: {

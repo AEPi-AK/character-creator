@@ -13,14 +13,9 @@ class LoadingScreen extends React.Component {
     return (
       <div className='screen-loading'>
         <Spinner noFadeIn={true} spinnerName='circle'/>
-        {
-          this.props.onTryAgain ?
-            <div className='button loading-try-again' onClick={this.props.onTryAgain}>
-              <div>Try Again?</div>
-            </div>
-          :
-            null
-          }
+          <div className='button loading-try-again' onClick={this.props.onTryAgain}>
+            <div>Try Again?</div>
+          </div>
       </div>
     )
   }

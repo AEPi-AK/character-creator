@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React from 'react'
 
 import SplashScanScreen from '../SplashScanScreen.jsx'
@@ -19,6 +20,7 @@ class ForestPlayer extends React.Component {
 
   constructor(props) {
     super(props)
+
     this.state = {
       isLoading: false,
       canAttack: false,
@@ -28,6 +30,9 @@ class ForestPlayer extends React.Component {
       player2: null,
       monster: null,
     }
+
+    this.pollTimer = null
+    this.updateFromState = _.throttle(this._updateFromState, POLL_INTERVAL)
 
     this.screens = [
       SplashScanScreen, //  0
@@ -68,7 +73,7 @@ class ForestPlayer extends React.Component {
     this.updateFromState(await attack(this.state.monster.id, this.localPlayer().id, dmg))
   }
 
-  async updateFromState(gameState) {
+  async _updateFromState(gameState) {
     console.log('updateFromState')
     console.log(gameState)
     let p1 = this.state.player1
