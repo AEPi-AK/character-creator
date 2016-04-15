@@ -2,15 +2,15 @@ import React from 'react'
 import SplashScreen from '../SplashScreen.jsx'
 import ScanScreen from '../ScanScreen.jsx'
 
-class DefeatedMonsterScreen extends React.Component {
+class PlayerDiedScreen extends React.Component {
 
     render() {
         return (
             <div className='container'>
-                Defeated Monster
+                Player Died
             </div>
         )
     }
 }
 
-export default DefeatedMonsterScreen
+export default PlayerDiedScreen
