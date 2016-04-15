@@ -27,7 +27,7 @@ class PlayerCard extends React.Component {
         </div>
         <div className='exp'>{player.points} exp</div>
         <div className='level'>Level {player.level}</div>
-        <HealthBar color={player.color} current={player.hp} total={player.hp_max}/>
+        <HealthBar color={player.color} current={player.hp} total={player.hp_max} barSize='player'/>
       </div>
     )
     }

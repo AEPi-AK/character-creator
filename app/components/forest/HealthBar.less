@@ -7,3 +7,52 @@
   position: absolute;
   bottom: -130px;
 }
+
+.health-bar {
+  height: 24px;
+  border-radius: 5px 0 0 5px;
+}
+
+.health-bar-outside {
+  height: 24px;
+  border-radius: 5px;
+}
+
+.color-green-light {
+
+  .health-bar {
+    background-color: @green-light;
+  }
+
+  .health-bar-outside {
+    background-color: @green-dark;
+    border: 3px solid @green-light;
+  }
+
+}
+
+.color-red {
+  
+  .health-bar {
+    background-color: @red;
+  }
+
+  .health-bar-outside {
+    background-color: @bg-card;
+    border: 3px solid @red;
+  }
+
+}
+
+.color-yellow {
+  
+  .health-bar {
+    background-color: @yellow;
+  }
+
+  .health-bar-outside {
+    background-color: @bg-card;
+    border: 3px solid @yellow;
+  }
+
+}
