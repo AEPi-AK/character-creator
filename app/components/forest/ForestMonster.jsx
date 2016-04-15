@@ -39,7 +39,7 @@ class ForestMonster extends React.Component {
     }
 
     this.pollTimer = null
-    this.gameIsEndinggameIsEnding = false
+    this.gameIsEnding = false
     this.updateFromState = _.throttle(this._updateFromState, POLL_INTERVAL)
 
     this.UPDATE_LOCK = true
@@ -47,7 +47,6 @@ class ForestMonster extends React.Component {
 
   async componentDidMount() {
     await this.newGame()
-    this.resumePolling()
   }
 
   componentWillUnmount() {
@@ -148,6 +147,7 @@ class ForestMonster extends React.Component {
     })
     await helloMonster(newMonster)
     this.setIsLoading(false)
+    this.resumePolling()
   }
 
   async endGame() {
@@ -167,7 +167,7 @@ class ForestMonster extends React.Component {
 
     console.log('WHOA!')
     this.setState({
-      description: 'Game Over! Players have been awarded 50 points. New game in 5 seconds.',
+      description: 'Game Over! New game in 5 seconds...',
     })
 
     setTimeout(this.newGame.bind(this), TIME_TO_RESTART)
