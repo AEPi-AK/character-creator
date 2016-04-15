@@ -13,7 +13,7 @@ class MonsterCard extends React.Component {
         <div className='name'>{monster.name}</div>
         <div className='status'>{this.props.status}</div>
         <div className='img-container'>
-          <img src={`static/img/${monster.id}.png`}/>
+          <img src={`static/img/${monster.id}.png` `monster-${monster.id}`}/>
         </div>
         <div className='level'>Level {monster.level}</div>
         <HealthBar color={monster.color} current={monster.hp} total={monster.hp_max} barSize='monster'/>

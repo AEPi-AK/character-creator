@@ -2,7 +2,7 @@ import React from 'react'
 
 class YouNeedAccountScreen extends React.Component {
 
-  
+
   render() {
 
 
@@ -12,10 +12,10 @@ class YouNeedAccountScreen extends React.Component {
           Before you battle, please create a character at a Character Creator station in the Tavern.
         </div>
 
-        <div className='button' onClick={()=>this.props.setScreen(0)}>
+        <div className='button' onClick={() => this.restart()}>
           OK
         </div>
-      
+
       </div>
     )
   }

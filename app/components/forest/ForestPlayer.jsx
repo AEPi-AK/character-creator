@@ -6,6 +6,7 @@ import ScanScreen from '../ScanScreen.jsx'
 import LoadingScreen from '../LoadingScreen.jsx'
 
 import ChooseAttackScreen from './ChooseAttackScreen.jsx'
+import YouNeedAccountScreen from './YouNeedAccountScreen.jsx'
 import AttackingScreen from './AttackingScreen.jsx'
 import DefeatedMonsterScreen from './DefeatedMonsterScreen.jsx'
 import PlayerDiedScreen from './PlayerDiedScreen.jsx'
@@ -39,6 +40,7 @@ class ForestPlayer extends React.Component {
       AttackingScreen,   // 2
       DefeatedMonsterScreen, // 3
       PlayerDiedScreen, // 4
+      YouNeedAccountScreen, // 5
     ].map(component => React.createFactory(component))
   }
 
@@ -172,9 +174,9 @@ class ForestPlayer extends React.Component {
     const localCharacter = await getCharacter(localPlayerId)
 
     if (localCharacter == null) {
-      // TODO: error screen if they don't have an account yet
-      alert('you need an account first')
-      window.location.reload()
+      this.setIsLoading(false)
+      this.setScreen(5)
+      return
     }
     const keyForLocalPlayer = this.state.number === 1 ? 'player1' : 'player2'
 
@@ -211,7 +213,7 @@ class ForestPlayer extends React.Component {
   }
 
   render() {
-    const noMonster = !this.state.monster && this.state.screen > 0
+    const noMonster = !this.state.monster && this.state.screen > 0 && this.state.screen != 5
 
     if (this.state.isLoading || noMonster) {
       return (
