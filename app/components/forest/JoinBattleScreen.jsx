@@ -4,25 +4,20 @@ import SplashScreen from '../SplashScreen.jsx'
 import ScanScreen from '../ScanScreen.jsx'
 
 import './JoinBattleScreen.less'
+import { getRandomMonster } from './Game.jsx'
 
-//requires: the number of players
-//requires: which players they are
-//requires: name and race of and HP of the monster that's attacking
-
-//todo: join button click
-
-class NoPlayerCard extends React.Component {
+class NoPlayerMiniCard extends React.Component {
 
     render() {
         return (
             <div className='no-player-card'>
-                <div className='join-text'>join battle</div>
+                <div className='join-text' onClick={this.props.onClick}>join battle</div>
             </div>
         )
     }
 }
 
-class PlayerCard extends React.Component {
+class PlayerMiniCard extends React.Component {
 
     render() {
         return (
@@ -36,42 +31,43 @@ class PlayerCard extends React.Component {
 
 class JoinBattleScreen extends React.Component {
 
+  onJoin() {
+    console.log('joining battle!')
+    this.props.setScreen(2)
+  }
+
   render() {
-      const monster = {
-        name: 'Forest Gnoll',
-        race: 'gnoll',
-      }
+    let forestTitle = 'ready to fight'
+    let playerCardRight = <NoPlayerMiniCard onClick={this.onJoin.bind(this)}/>
+    let playerCardLeft = <NoPlayerMiniCard onClick={this.onJoin.bind(this)}/>
 
-      var numPlayers = 1;
+    // TODO: Put this on the correct side
+    console.log(this.props.localPlayer)
+    playerCardLeft = <PlayerMiniCard player={this.props.localPlayer}/>
+    forestTitle = 'active battle'
 
-      var forestTitle = `ready to fight`
-      var playerCardRight = <NoPlayerCard/>
-      var playerCardLeft = <NoPlayerCard/>
-
-      if (numPlayers>=1) {
-        playerCardLeft = <PlayerCard player={this.props.player}/>
-        forestTitle = "active battle"
-      }
-
-      if (numPlayers==2) {
-        playerCardRight = <PlayerCard player={this.props.player}/>
-        forestTitle = "active battle"
-      }
-
-      return (
-        <div className='forest-player-container'>
-            <div className='forest-title'>{forestTitle}</div>
-            <div className='card-container'>
-                {playerCardLeft}
-                <div className='monster-card'>
-                    <img src={`static/img/${monster.race}.png`}/>
-                    <div className='monster-name'>{monster.name}</div>
-                </div>
-                {playerCardRight}
-            </div>
-        </div>
-      )
+    if (this.props.remotePlayer) {
+      playerCardRight = <PlayerMiniCard player={this.props.remotePlayer}/>
+      forestTitle = 'active battle'
     }
+
+    console.log(this.props.monster)
+
+    return (
+      <div className='forest-player-container'>
+        <div className='forest-title'>{forestTitle}</div>
+        <div className='card-container'>
+          {playerCardLeft}
+          <div className='monster-card'>
+            <img src={`static/img/${this.props.monster.id}.png`}/>
+            <div className='monster-name'>{this.props.monster.name}</div>
+          </div>
+          {playerCardRight}
+        </div>
+      </div>
+    )
+  }
+
 }
 
 export default JoinBattleScreen
