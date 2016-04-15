@@ -13,41 +13,22 @@ import { DRAGONSLAYER_LEVEL, calculateLevel, calculateHp, calculateDamage, getCh
 
 class DefeatedMonsterScreen extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-          character: {
-            race: 'Dwarf',
-            strength: 15,
-            wisdom: 20,
-            dexterity: 12,
-            points: 40,
-            pro_id: 0,
-          },
-          newPoints: 100,
-        }
-    }
+  render() {
+    console.log(this.props.localPlayer)
+    return (
+      <div className='container'>
+        <div className='defeated-title'>You have slain the beast!</div>
+        <div className='defeated-subtitle'>
+          Your character has gained {50} experience points.
+        </div>
+        <div className='character-card-container'>
+          <CharacterCard character={this.props.localPlayer}/>
+        </div>
+        <div className='new-battle-button' onClick={this.props.restart}>new battle</div>
+      </div>
+    )
+  }
 
-    componentDidMount() {
-      let character = this.props.character
-      character.points += this.props.newPoints
-      this.setState({character})
-    }
-
-    render() {
-        return (
-            <div className='container'>
-                <div className='defeated-title'>You have slain the beast!</div>
-                <div className='defeated-subtitle'>
-                  Your character has gained {this.state.newPoints} experience points.
-                </div>
-                <div className='character-card-container'>
-                  <CharacterCard character={this.state.character}/>
-                </div>
-                <div className='new-battle-button' onClick={() => this.props.setScreen(0)}>new battle</div>
-            </div>
-        )
-    }
 }
 
 export default DefeatedMonsterScreen

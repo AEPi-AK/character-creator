@@ -23,7 +23,7 @@ const MONSTERS = [
 
 // Adds a player, returns state
 async function helloPlayer(player, number) {
-  console.log(`helloPlayer(id="${player.id}" number=${number})`)
+  // console.log(`helloPlayer(id="${player.id}" number=${number})`)
   const response = await fetch(window.GAME_BASE + '/hello', {
     method: 'POST',
     headers: {
@@ -75,7 +75,7 @@ async function helloMonster(monster) {
 
 // Does an attack of "damage" to the identifier, returns the state.
 async function attack(target_id, attacker_id, damage, name) {
-  console.log(`attack(id=${target_id}, id=${attacker_id}, ${damage})`)
+  // console.log(`attack(id=${target_id}, id=${attacker_id}, ${damage})`)
   const response = await fetch(window.GAME_BASE + '/attack', {
     method: 'POST',
     headers: {
@@ -142,6 +142,9 @@ function playerFromCharacter(character) {
   player.isDragonSlayer = player.level >= DRAGONSLAYER_LEVEL
   player.color = player.isDragonSlayer ? 'red' : 'yellow'
   player.name = character.name
+  player.strength = character.strength
+  player.dexterity = character.dexterity
+  player.wisdom = character.wisdom
   player.race = character.race
   player.id = character.id
   return player
