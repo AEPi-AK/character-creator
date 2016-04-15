@@ -37,6 +37,51 @@ class ForestMonster extends React.Component {
     }
   }
 
+  async componentDidMount() {
+    await this.startNewGame()
+    this.resumePolling()
+  }
+
+  componentWillUnmount() {
+    this.stopPolling()
+  }
+
+  setIsLoading(isLoading) {
+    this.setState({isLoading})
+  }
+
+  playersInGame() {
+    return this.state.player1 || this.state.player2
+  }
+
+  gameShouldEnd() {
+    if (!this.playersInGame()) {
+      return false
+    }
+
+    if (this.state.player1 && !this.state.player2) {
+      if (this.state.player1.hp <= 0) {
+        return true
+      }
+    }
+    else if (this.state.player2 && !this.state.player1) {
+      if (this.state.player2.hp <= 0) {
+        return true
+      }
+    }
+    else {
+      if (this.state.player1.hp <= 0 && this.state.player1.hp <= 0) {
+        return true
+      }
+    }
+
+    if (this.state.monster.hp <= 0) {
+      // TODO: we lost!
+      return true
+    }
+    return false
+  }
+
   async updateFromState(gameState) {
     console.log('updateFromState')
     console.log(gameState)
@@ -88,47 +133,6 @@ class ForestMonster extends React.Component {
     }
   }
 
-  stopPolling() {
-    console.log('this.stopPolling()')
-    clearInterval(this.pollTimer)
-  }
-
-  setIsLoading(isLoading) {
-    this.setState({isLoading})
-  }
-
-  playersInGame() {
-    return this.state.player1 || this.state.player2
-  }
-
-  gameShouldEnd() {
-    if (!this.playersInGame()) {
-      return false
-    }
-
-    if (this.state.player1 && !this.state.player2) {
-      if (this.state.player1.hp <= 0) {
-        return true
-      }
-    }
-    else if (this.state.player2 && !this.state.player1) {
-      if (this.state.player2.hp <= 0) {
-        return true
-      }
-    }
-    else {
-      if (this.state.player1.hp <= 0 && this.state.player1.hp <= 0) {
-        return true
-      }
-    }
-
-    if (this.state.monster.hp <= 0) {
-      // TODO: we lost!
-      return true
-    }
-    return false
-  }
-
   async startNewGame() {
     this.setIsLoading(true)
     const newMonster = getRandomMonster()
@@ -165,13 +169,9 @@ class ForestMonster extends React.Component {
     }, POLL_INTERVAL)
   }
 
-  async componentDidMount() {
-    await this.startNewGame()
-    this.resumePolling()
-  }
-
-  componentWillUnmount() {
-    this.stopPolling()
+  stopPolling() {
+    console.log('this.stopPolling()')
+    clearInterval(this.pollTimer)
   }
 
   render() {

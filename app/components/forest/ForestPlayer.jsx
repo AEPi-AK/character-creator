@@ -47,13 +47,12 @@ class ForestPlayer extends React.Component {
     return this.state.number === 1 ? this.state.player2 : this.state.player1
   }
 
-  stopPolling() {
-    console.log('stopPolling()')
-    clearInterval(this.pollTimer)
-  }
-
   setIsLoading(isLoading) {
     this.setState({isLoading})
+  }
+
+  setScreen(index) {
+    this.setState({screen: index})
   }
 
   async hello() {
@@ -145,10 +144,6 @@ class ForestPlayer extends React.Component {
   stopPolling() {
     console.log('stopPolling()')
     clearInterval(this.pollTimer)
-  }
-
-  setScreen(index) {
-    this.setState({screen: index})
   }
 
   render() {

@@ -66,10 +66,10 @@ async function updateCharacter(character) {
      'Accept': 'application/json',
      'Content-Type': 'application/json'
     },
-    // pro_id is the only thing we ever want to update from the kiosk
     body: JSON.stringify({
       id: character.id,
-      pro_id: character.pro_id
+      pro_id: character.pro_id,
+      points: character.points,
     }),
   })
 
