@@ -200,16 +200,12 @@ class ForestPlayer extends React.Component {
   }
 
   stopPolling() {
+    return
     console.log('stopPolling()')
     clearInterval(this.pollTimer)
   }
 
   render() {
-    return (
-        <div className='screen'>
-          <PlayerDiedScreen/>
-        </div>
-      )
     const noMonster = !this.state.monster && this.state.screen > 0 && this.state.screen != 5
 
     if (this.state.isLoading || noMonster) {

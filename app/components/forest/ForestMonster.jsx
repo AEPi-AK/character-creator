@@ -82,10 +82,8 @@ class ForestMonster extends React.Component {
         return true
       }
     }
-    else {
-      if (this.state.player1.hp <= 0 && this.state.player1.hp <= 0) {
-        return true
-      }
+    if (this.state.player1 && this.state.player2 && this.state.player1.hp <= 0 && this.state.player1.hp <= 0) {
+      return true
     }
 
     if (this.state.monster.hp <= 0) {
