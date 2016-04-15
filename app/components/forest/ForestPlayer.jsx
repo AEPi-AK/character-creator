@@ -53,10 +53,6 @@ class ForestPlayer extends React.Component {
     return this.state.number === 1 ? this.state.player1 : this.state.player2
   }
 
-  remotePlayer() {
-    return this.state.number === 1 ? this.state.player2 : this.state.player1
-  }
-
   setIsLoading(isLoading) {
     this.setState({isLoading})
   }
@@ -224,7 +220,6 @@ class ForestPlayer extends React.Component {
       player1: this.state.player1,
       player2: this.state.player2,
       localPlayer: this.localPlayer(),
-      remotePlayer: this.remotePlayer(),
       number: this.state.number,
       monster: this.state.monster,
       onData: this.onData.bind(this),
