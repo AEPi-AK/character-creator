@@ -3,6 +3,7 @@ import SplashScreen from '../SplashScreen.jsx'
 import ScanScreen from '../ScanScreen.jsx'
 import CharacterCard from '../CharacterCard.jsx'
 
+import './DefeatedMonsterScreen.less'
 import { DRAGONSLAYER_LEVEL, calculateLevel, calculateHp, calculateDamage, getCharacter, updateCharacter } from '../Character.jsx'
 
 //requires how many experience points the player gained
@@ -28,8 +29,8 @@ class DefeatedMonsterScreen extends React.Component {
     }
 
     componentDidMount() {
-      let character = this.state.character
-      character.points += this.state.newPoints
+      let character = this.props.character
+      character.points += this.props.newPoints
       this.setState({character})
     }
 
@@ -40,7 +41,9 @@ class DefeatedMonsterScreen extends React.Component {
                 <div className='defeated-subtitle'>
                   Your character has gained {this.state.newPoints} experience points.
                 </div>
-                <CharacterCard character={this.state.character}/>
+                <div className='character-card-container'>
+                  <CharacterCard character={this.state.character}/>
+                </div>
                 <div className='new-battle-button' onClick={() => this.props.setScreen(0)}>new battle</div>
             </div>
         )
