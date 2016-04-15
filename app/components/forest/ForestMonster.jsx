@@ -145,7 +145,7 @@ class ForestMonster extends React.Component {
     this.setState({
       monster: newMonster,
     })
-    await helloMonster(newMonster)
+    this.updateFromState(await helloMonster(newMonster))
     this.setIsLoading(false)
     this.resumePolling()
   }

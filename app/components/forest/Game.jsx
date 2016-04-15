@@ -33,7 +33,7 @@ async function helloPlayer(player, number) {
     body: JSON.stringify({
       player: {
         id: player.id,
-        hitpoints: player.hp,
+        hitpoints: player.hp_max,
       },
       player_number: number,
     }),
