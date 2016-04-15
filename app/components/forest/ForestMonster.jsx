@@ -4,12 +4,12 @@ import React from 'react'
 import PlayerCard from './PlayerCard.jsx'
 import MonsterCard from './MonsterCard.jsx'
 import { playerFromCharacter, helloMonster, attack, poll, getRandomMonster } from './Game.jsx'
-import { DRAGONSLAYER_LEVEL, calculateLevel, calculateHp, calculateDamage, getCharacter, updateCharacter } from '../Character.jsx'
+import { DRAGONSLAYER_LEVEL, calculateLevel, calculateHp, calculateDamageMonster, getCharacter, updateCharacter } from '../Character.jsx'
 
 import './ForestMonster.less'
 
-const POLL_INTERVAL = 1000
-const TIME_TO_RESTART = 4000
+const POLL_INTERVAL = 250
+const TIME_TO_RESTART = 5000
 
 class BattleText extends React.Component {
 
@@ -153,23 +153,12 @@ class ForestMonster extends React.Component {
   }
 
   async endGame() {
+    console.log('endGame()')
     if (this.gameIsEnding) return
     this.gameIsEnding = true
     this.stopPolling()
-
-    if (this.state.player1) {
-      this.state.player1.points += 50
-      await updateCharacter(this.state.player1)
-    }
-
-    if (this.state.player2) {
-      this.state.player2.points += 50
-      await updateCharacter(this.state.player2)
-    }
-
-    console.log('WHOA!')
     this.setState({
-      description: 'Game Over! New game in 5 seconds...',
+      description: 'Game Over!',
     })
 
     setTimeout(this.newGame.bind(this), TIME_TO_RESTART)
@@ -196,7 +185,7 @@ class ForestMonster extends React.Component {
           playerToAttack = Math.random() > 0.5 ? this.state.player1 : this.state.player2
         }
 
-        const dmg = calculateDamage(this.state.monster)
+        const dmg = calculateDamageMonster(this.state.monster)
         this.updateFromState(await attack(playerToAttack.id, this.state.monster.id, dmg))
       }
     }, POLL_INTERVAL)

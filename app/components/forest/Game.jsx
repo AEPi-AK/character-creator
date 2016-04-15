@@ -2,6 +2,7 @@ import 'whatwg-fetch'
 
 import { rollDie, DRAGONSLAYER_LEVEL, calculateLevel, calculateHp } from '../Character.jsx'
 
+const PLAYER_HP_MULTIPLIER = 5
 const MONSTERS = [
   {
     id: 'gnoll',
@@ -10,15 +11,43 @@ const MONSTERS = [
     hp_max: 30,
     level: 3,
     color: 'green-light',
+    baseDamage: 10,
+    variance: 4,
+    pointsAwarded: 50,
   },
   {
     id: 'hill-giant',
     name: 'Hill Giant',
-    hp: 40,
-    hp_max: 40,
+    hp: 80,
+    hp_max: 80,
     level: 5,
     color: 'green-light',
-  }
+    baseDamage: 20,
+    variance: 8,
+    pointsAwarded: 75,
+  },
+  {
+    id: 'hardmonster',
+    name: 'Hard Monster',
+    hp: 190,
+    hp_max: 190,
+    level: 5,
+    color: 'green-light',
+    baseDamage: 40,
+    variance: 12,
+    pointsAwarded: 100,
+  },
+  {
+    id: 'dragon',
+    name: 'Forest Dragon',
+    hp: 400,
+    hp_max: 400,
+    level: 5,
+    color: 'green-light',
+    baseDamage: 60,
+    pointsAwarded: 300,
+    variance: 5,
+  },
 ]
 
 // Adds a player, returns state
@@ -136,8 +165,8 @@ function getRandomMonster() {
 function playerFromCharacter(character) {
   let player = {}
   player.level = calculateLevel(character.points)
-  player.hp_max = calculateHp(character)
   player.points = character.points
+  player.hp_max = calculateHp(character)
   player.hp = player.hp_max
   player.isDragonSlayer = player.level >= DRAGONSLAYER_LEVEL
   player.color = player.isDragonSlayer ? 'red' : 'yellow'

@@ -67,33 +67,42 @@ class ForestPlayer extends React.Component {
     let playerVictory = false
     let monsterVictory = false
 
-    if (this.state.number == 1 && this.state.player1) {
-      if (this.state.player1.hp <= 0) {
-        monsterVictory = true
-      }
-    }
-    else if (this.state.number == 2 && this.state.player2) {
-      if (this.state.player2.hp <= 0) {
-        monsterVictory = true
-      }
+    console.log('checkwin')
+    console.log(this.localPlayer().hp)
+
+    if (this.localPlayer() && this.localPlayer().hp <= 0) {
+      console.log('monStervictorty stiting true')
+      monsterVictory = true
     }
 
     if (this.state.monster.hp <= 0) {
       playerVictory = true
     }
 
-    if (!(playerVictory || monsterVictory)) {
+    if (!playerVictory && !monsterVictory) {
+      console.log("BAILING OIT")
       return
     }
 
-    this.gameIsEnding = true
+    this.gameEnded = true
 
     if (playerVictory) {
       this.setScreen(3)
     }
-    else if (monsterVictory) {
+    if (monsterVictory) {
+      console.log('monster victory setcreen call')
       this.setScreen(4)
     }
+
+    // if (this.state.player1) {
+    //   this.state.player1.points += 50
+    //   await updateCharacter(this.state.player1)
+    // }
+    //
+    // if (this.state.player2) {
+    //   this.state.player2.points += 50
+    //   await updateCharacter(this.state.player2)
+    // }
 
     this.stopPolling()
   }
@@ -185,7 +194,6 @@ class ForestPlayer extends React.Component {
     this.updateFromState(gameState)
 
     if (canAttack) {
-      console.log('attack timeout, gameEnded', this.gameEnded)
       if (this.gameEnded) return
       this.setState({canAttack})
       this.setScreen(1)
