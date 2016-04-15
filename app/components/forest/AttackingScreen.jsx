@@ -20,7 +20,7 @@ class AttackingScreen extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
-        monsterHP: 30,
+        monsterHP: 20,
         monsterName: 'spoopy monster',
         attackDamage: 20,
       }
