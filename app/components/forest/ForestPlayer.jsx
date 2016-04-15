@@ -205,6 +205,11 @@ class ForestPlayer extends React.Component {
   }
 
   render() {
+    return (
+        <div className='screen'>
+          <PlayerDiedScreen/>
+        </div>
+      )
     const noMonster = !this.state.monster && this.state.screen > 0 && this.state.screen != 5
 
     if (this.state.isLoading || noMonster) {
