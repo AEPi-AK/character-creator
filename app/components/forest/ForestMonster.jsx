@@ -159,7 +159,7 @@ class ForestMonster extends React.Component {
       description: 'Game Over!',
     })
 
-    setTimeout(this.newGame.bind(this), TIME_TO_RESTART)
+    window.location.reload()
   }
 
   async resumePolling() {

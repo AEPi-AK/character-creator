@@ -159,7 +159,7 @@ function monsterFromId(id) {
 }
 
 function getRandomMonster() {
-  return MONSTERS[Math.floor(Math.random() * 10) % MONSTERS.length]
+  return MONSTERS[0]
 }
 
 function playerFromCharacter(character) {
