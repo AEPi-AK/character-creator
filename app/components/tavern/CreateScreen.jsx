@@ -13,7 +13,9 @@ class CreateScreen extends React.Component {
     })
     // Generate random race
     const randomSelection = a => a[Math.floor((Math.random() * 10)) % a.length]
+
     this.props.character.race = randomSelection(RACES)
+    this.props.setCharacter(this.props.character)
     // Skip to the review screen
     this.props.advanceScreen(5)
   }

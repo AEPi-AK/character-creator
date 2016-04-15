@@ -52,8 +52,9 @@ class Tavern extends React.Component {
   }
 
   restart() {
-    console.log('restarting')
-    this.setState(this.initialState)
+    // console.log('restarting')
+    // this.setState(this.initialState)
+    window.location.reload()
   }
 
   render() {
