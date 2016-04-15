@@ -168,7 +168,7 @@ function playerFromCharacter(character) {
   player.points = character.points
   player.hp_max = calculateHp(character)
   player.hp = player.hp_max
-  player.isDragonSlayer = player.level >= DRAGONSLAYER_LEVEL
+  player.isDragonSlayer = player.level >= DRAGONSLAYER_LEVEL && character.pro_id
   player.color = player.isDragonSlayer ? 'red' : 'yellow'
   player.name = character.name
   player.strength = character.strength
