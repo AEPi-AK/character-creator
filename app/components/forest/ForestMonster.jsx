@@ -96,8 +96,8 @@ class ForestMonster extends React.Component {
   }
 
   async updateFromState(gameState) {
-    console.log('updateFromState')
-    console.log(gameState)
+    // console.log('updateFromState')
+    // console.log(gameState)
     let p1 = this.state.player1
     let p2 = this.state.player2
 
@@ -142,9 +142,11 @@ class ForestMonster extends React.Component {
     this.gameIsEnding = false
     this.setIsLoading(true)
     const newMonster = getRandomMonster()
+    newMonster.hp = newMonster.hp_max
     this.setState({
       monster: newMonster,
     })
+    console.log(newMonster.hp)
     await this.updateFromState(await helloMonster(newMonster))
     this.setIsLoading(false)
     this.resumePolling()

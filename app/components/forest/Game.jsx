@@ -6,16 +6,16 @@ const MONSTERS = [
   {
     id: 'gnoll',
     name: 'Forest Gnoll',
-    hp: 300,
-    hp_max: 300,
+    hp: 30,
+    hp_max: 30,
     level: 3,
     color: 'green-light',
   },
   {
     id: 'hill-giant',
     name: 'Hill Giant',
-    hp: 500,
-    hp_max: 500,
+    hp: 40,
+    hp_max: 40,
     level: 5,
     color: 'green-light',
   }
@@ -101,7 +101,7 @@ async function attack(target_id, attacker_id, damage, name) {
 // Returns true if identifier can take another attack, otherwise false.
 // Returns state
 async function poll(identifier) {
-  console.log(`poll(identifier="${identifier}")`)
+  // console.log(`poll(identifier="${identifier}")`)
   const response = await fetch(window.GAME_BASE + '/poll', {
     method: 'POST',
     headers: {
