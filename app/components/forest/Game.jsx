@@ -27,8 +27,8 @@ const MONSTERS = [
     pointsAwarded: 75,
   },
   {
-    id: 'hardmonster',
-    name: 'Hard Monster',
+    id: 'werebear',
+    name: 'Werebear',
     hp: 190,
     hp_max: 190,
     level: 5,
