@@ -5,6 +5,12 @@ import ScanScreen from '../ScanScreen.jsx'
 
 import './JoinBattleScreen.less'
 
+//requires: the number of players
+//requires: which players they are
+//requires: name and race of and HP of the monster that's attacking
+
+//todo: join button click
+
 class NoPlayerCard extends React.Component {
 
     render() {

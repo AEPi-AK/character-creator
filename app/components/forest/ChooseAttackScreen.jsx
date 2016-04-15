@@ -7,9 +7,8 @@ import { DRAGONSLAYER_LEVEL, calculateLevel, calculateHp, calculateDamage, getCh
 
 import './ChooseAttackScreen.less'
 
-
 // requires: a player. namely, their experience points.
-// ensures: chosenAttack is set to 0, 1, or 2, with 2 being the most advanced.
+// ensures: prop chosenAttack is set to 0, 1, or 2, with 2 being the most advanced.
 
 // onClick for active attacks currently sets chosen attack. 
 // will soon send user to "attacking monster" screen.
@@ -19,7 +18,7 @@ class ChooseAttackScreen extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          exp: 999,
+          exp: 50,
           chosenAttack: null,
           attacks: [
             {
@@ -53,6 +52,7 @@ class ChooseAttackScreen extends React.Component {
 
     chooseAttack(i) {
       this.setState({chosenAttack: i})
+      this.props.setScreen(3)
     }
 
     render() {
