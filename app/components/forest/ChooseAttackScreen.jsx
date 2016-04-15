@@ -7,41 +7,59 @@ import { DRAGONSLAYER_LEVEL, calculateLevel, calculateHp, calculateDamage, getCh
 
 import './ChooseAttackScreen.less'
 
+
+// requires: a player. namely, their experience points.
+// ensures: chosenAttack is set to 0, 1, or 2, with 2 being the most advanced.
+
+// onClick for active attacks currently sets chosen attack. 
+// will soon send user to "attacking monster" screen.
+
 class ChooseAttackScreen extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+          exp: 999,
+          chosenAttack: null,
+          attacks: [
+            {
+              name: 'Brash Strike',
+              activeIcon: './static/img/attack1-active.svg',
+              inactiveIcon: './static/img/attac1-inactive.svg',
+              levelThresh: 0,
+              activeDescription: 'Strike your enemy hard with a strong fist',
+              inactiveDescription: null,
+              available: true,
+            },
+            {
+              name: 'Takedown Attack',
+              activeIcon: './static/img/attack2-active.png',
+              inactiveIcon: './static/img/attack2-inactive.png',
+              levelThresh: 2,
+              activeDescription: 'This swift and powerful attack will leave your enemies hurting',
+              inactiveDescription: 'Secondary attack available at Level 2',
+            },
+            {
+              name: 'Mighty Surge',
+              activeIcon: './static/img/attack3-active.svg',
+              inactiveIcon: './static/img/attack3-inactive.svg',
+              levelThresh: DRAGONSLAYER_LEVEL,
+              activeDescription: "You strike true, and your enemy's howl of pain is like music to your ears",
+              inactiveDescription: 'Dragon Slayer attack available at level 4',
+            },
+          ]
+        }
+    }
+
+    chooseAttack(i) {
+      this.setState({chosenAttack: i})
+    }
 
     render() {
 
-        var exp = 0
-
-        const attacks = [
-          {
-            name: 'Brash Strike',
-            activeIcon: './static/img/attack1-active.svg',
-            inactiveIcon: './static/img/attac1-inactive.svg',
-            levelThresh: 0,
-            activeDescription: 'Brash strike is a 1st level fighter attack power',
-            inactiveDescription: null,
-            available: true,
-          },
-          {
-            name: 'Takedown Attack',
-            activeIcon: './static/img/attack2-active.png',
-            inactiveIcon: './static/img/attack2-inactive.png',
-            levelThresh: 2,
-            activeDescription: 'This swift and powerful attack will leave your enemies hurting',
-            inactiveDescription: 'Available at level 2',
-          },
-          {
-            name: 'Mighty Surge',
-            activeIcon: './static/img/attack3-active.svg',
-            inactiveIcon: './static/img/attack3-inactive.svg',
-            levelThresh: DRAGONSLAYER_LEVEL,
-            activeDescription: "You strike true, and your enemy's howl of pain is like music to your ears",
-            inactiveDescription: 'Dragon Slayer attack available at level 4',
-          },
-        ].map((attack, i) => {
+      const attacks = this.state.attacks.map((attack, i) => {
           var active = false;
-          if (calculateLevel(exp)>=attack.levelThresh) {
+          if (calculateLevel(this.state.exp)>=attack.levelThresh) {
             active = true;
           }
 
@@ -50,13 +68,14 @@ class ChooseAttackScreen extends React.Component {
             if (attack.levelThresh==DRAGONSLAYER_LEVEL)
               typeOfAttack='dragonslayer'
             return (
-                <div className={`attack-active-${typeOfAttack}`} key={i}>
+                <div className={`attack-active-${typeOfAttack}`} key={i} onClick={() => this.chooseAttack(i)}>
                   <div className='attack-name'>{attack.name}</div>
                   <div className='icon'><img src={attack.activeIcon}/></div>
                   <div className='text'>{attack.activeDescription}</div>
                 </div>
             )
           }
+
           return ( 
             <div className='attack-inactive' key={i}>
               <div className='attack-name'>{attack.name}</div>
@@ -69,7 +88,9 @@ class ChooseAttackScreen extends React.Component {
         return (
             <div className='container'>
                 <div className='choose-attack-title'>choose an attack</div>
-                {attacks}
+                <div className='attack-container'>
+                  {attacks}
+                </div>
             </div>
         )
     }
