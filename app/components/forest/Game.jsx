@@ -52,7 +52,7 @@ const MONSTERS = [
 
 // Adds a player, returns state
 async function helloPlayer(player, number) {
-  // console.log(`helloPlayer(id="${player.id}" number=${number})`)
+  console.log(`helloPlayer(id="${player.id}" number=${number})`)
   const response = await fetch(window.GAME_BASE + '/hello', {
     method: 'POST',
     headers: {

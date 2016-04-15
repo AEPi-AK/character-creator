@@ -11,7 +11,7 @@ class YouNeedAccountScreen extends React.Component {
           Before you battle, please create a character at a Character Creator station in the Tavern.
         </div>
 
-        <div className='button' onClick={() => this.restart()}>
+        <div className='button' onClick={() => this.props.restart()}>
           OK
         </div>
 

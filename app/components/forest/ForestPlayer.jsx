@@ -14,7 +14,7 @@ import PlayerDiedScreen from './PlayerDiedScreen.jsx'
 import { monsterFromId, playerFromCharacter, helloPlayer, attack, poll} from './Game.jsx'
 import { DRAGONSLAYER_LEVEL, calculateLevel, calculateHp, calculateDamage, getCharacter, updateCharacter } from '../Character.jsx'
 
-const POLL_INTERVAL = 250
+const POLL_INTERVAL = 500
 
 class ForestPlayer extends React.Component {
 
@@ -120,7 +120,7 @@ class ForestPlayer extends React.Component {
     let p1 = this.state.player1
     let p2 = this.state.player2
 
-    if (gameState.player1.id !== "") {
+    if (this.state.number == 1 && gameState.player1.id !== "") {
       if (gameState.player1.id == p1.id) {
         p1.hp = Math.max(0, gameState.player1.hitpoints)
       } else {
@@ -130,7 +130,7 @@ class ForestPlayer extends React.Component {
       p1 = null
     }
 
-    if (gameState.player2.id !== "") {
+    if (this.state.number == 2 && gameState.player2.id !== "") {
       if (gameState.player2.id == p2.id) {
         p2.hp = Math.max(0, gameState.player2.hitpoints)
       } else {
