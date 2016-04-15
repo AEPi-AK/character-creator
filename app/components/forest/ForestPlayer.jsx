@@ -21,6 +21,7 @@ class ForestPlayer extends React.Component {
     super(props)
     this.state = {
       isLoading: false,
+      canAttack: false,
       screen: 0,
       number: props.number,
       player1: null,
@@ -63,6 +64,11 @@ class ForestPlayer extends React.Component {
     this.resumePolling()
   }
 
+  async attack() {
+    const dmg = calculateDamage(this.localPlayer())
+    this.updateFromState(await attack(this.state.monster.id, this.localPlayer().id, dmg))
+  }
+
   async updateFromState(gameState) {
     console.log('updateFromState')
     console.log(gameState)
@@ -71,7 +77,7 @@ class ForestPlayer extends React.Component {
 
     if (gameState.player1.id !== "") {
       if (gameState.player1.id == p1.id) {
-        p1.hp = gameState.player1.hitpoints
+        p1.hp = Math.max(0, gameState.player1.hitpoints)
       } else {
         p1 = playerFromCharacter(await getCharacter(p1.id))
       }
@@ -81,7 +87,7 @@ class ForestPlayer extends React.Component {
 
     if (gameState.player2.id !== "") {
       if (gameState.player2.id == p2.id) {
-        p2.hp = gameState.player1.hitpoints
+        p2.hp = Math.max(0, gameState.player2.hitpoints)
       } else {
         p2 = playerFromCharacter(await getCharacter(p2.id))
       }
@@ -128,17 +134,11 @@ class ForestPlayer extends React.Component {
   async resumePolling() {
     this.stopPolling()
     this.pollTimer = setInterval(async () => {
-      // check if monster has been hit, and display
+      // TODO: check if monster has been hit, and display
       const {canAttack, gameState} = await poll(this.localPlayer().id)
       this.updateFromState(gameState)
-
-      if (canAttack) {
-        // TODO: enable buttons
-        // I attack
-
-        const dmg = calculateDamage(this.localPlayer())
-        this.updateFromState(await attack(this.state.monster.id, this.localPlayer().id, dmg))
-      }
+      // TODO: enable buttons
+      this.setState({canAttack})
     }, POLL_INTERVAL)
   }
 
@@ -169,6 +169,7 @@ class ForestPlayer extends React.Component {
       number: this.state.number,
       monster: this.state.monster,
       onData: this.onData.bind(this),
+      attack: this.attack.bind(this),
     }))
 
     return (

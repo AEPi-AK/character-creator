@@ -45,7 +45,7 @@ class ForestMonster extends React.Component {
 
     if (gameState.player1.id !== "") {
       if (p1 && gameState.player1.id == p1.id) {
-        p1.hp = gameState.player1.hitpoints
+        p1.hp = Math.max(0, gameState.player1.hitpoints)
       } else {
         p1 = playerFromCharacter(await getCharacter(gameState.player1.id))
       }
@@ -55,7 +55,7 @@ class ForestMonster extends React.Component {
 
     if (gameState.player2.id !== "") {
       if (p2 && gameState.player2.id == p2.id) {
-        p2.hp = gameState.player1.hitpoints
+        p2.hp = Math.max(0, gameState.player2.hitpoints)
       } else {
         p2 = playerFromCharacter(await getCharacter(gameState.player2.id))
       }
@@ -63,10 +63,14 @@ class ForestMonster extends React.Component {
       p2 = null
     }
 
+    let monster = this.state.monster
+    monster.hp = Math.max(0, gameState.monster.hitpoints)
+
     // TODO: If player has been damaged, animate whichever one has been damaged
     this.setState({
       player1: p1,
       player2: p2,
+      monster,
     })
 
     if (this.gameShouldEnd()) {
@@ -102,10 +106,24 @@ class ForestMonster extends React.Component {
       return false
     }
 
-    if (this.state.player1.hp <= 0 && this.state.player2.hp <= 0) {
-      return true
+    if (this.state.player1 && !this.state.player2) {
+      if (this.state.player1.hp <= 0) {
+        return true
+      }
     }
-    if (monster.hp <= 0) {
+    else if (this.state.player2 && !this.state.player1) {
+      if (this.state.player2.hp <= 0) {
+        return true
+      }
+    }
+    else {
+      if (this.state.player1.hp <= 0 && this.state.player1.hp <= 0) {
+        return true
+      }
+    }
+
+    if (this.state.monster.hp <= 0) {
+      // TODO: we lost!
       return true
     }
     return false
@@ -129,8 +147,18 @@ class ForestMonster extends React.Component {
       this.updateFromState(gameState)
 
       if (canAttack && this.playersInGame()) {
-        // Attack a player at random
-        const playerToAttack = Math.random() > 0.5 ? this.state.player1 : this.state.player2
+
+        // Choose a random player to attack
+        let playerToAttack
+        if (this.state.player1 && !this.state.player2) {
+          playerToAttack = this.state.player1
+        }
+        else if (this.state.player2 && !this.state.player1) {
+          playerToAttack = this.state.player2
+        } else {
+          playerToAttack = Math.random() > 0.5 ? this.state.player1 : this.state.player2
+        }
+
         const dmg = calculateDamage(this.state.monster)
         this.updateFromState(await attack(playerToAttack.id, this.state.monster.id, dmg))
       }
