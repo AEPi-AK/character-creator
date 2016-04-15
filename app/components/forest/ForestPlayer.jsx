@@ -68,9 +68,11 @@ class ForestPlayer extends React.Component {
     this.resumePolling()
   }
 
-  async attack() {
-    const dmg = calculateDamage(this.localPlayer())
-    this.updateFromState(await attack(this.state.monster.id, this.localPlayer().id, dmg))
+  async attack(dmg, name) {
+    console.log('attacking with name and dmg', name, dmg)
+    // const dmg = calculateDamage(this.localPlayer())
+    this.setScreen(3)
+    this.updateFromState(await attack(this.state.monster.id, this.localPlayer().id, dmg, name))
   }
 
   async _updateFromState(gameState) {
@@ -152,7 +154,12 @@ class ForestPlayer extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) {
+
+    const noMonster = !this.state.monster && this.state.screen > 0
+
+    console.log('noMonster')
+
+    if (this.state.isLoading || noMonster) {
       return (
         <div className='screen'>
           <LoadingScreen onTryAgain={() => window.location.reload()}/>

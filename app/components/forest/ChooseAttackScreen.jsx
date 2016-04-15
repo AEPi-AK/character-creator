@@ -10,7 +10,7 @@ import './ChooseAttackScreen.less'
 // requires: a player. namely, their experience points.
 // ensures: prop chosenAttack is set to 0, 1, or 2, with 2 being the most advanced.
 
-// onClick for active attacks currently sets chosen attack. 
+// onClick for active attacks currently sets chosen attack.
 // will soon send user to "attacking monster" screen.
 
 class ChooseAttackScreen extends React.Component {
@@ -52,7 +52,7 @@ class ChooseAttackScreen extends React.Component {
 
     chooseAttack(i) {
       this.setState({chosenAttack: i})
-      this.props.setScreen(3)
+      this.props.attack(10, this.state.attacks[i].name)
     }
 
     render() {
@@ -76,12 +76,12 @@ class ChooseAttackScreen extends React.Component {
             )
           }
 
-          return ( 
+          return (
             <div className='attack-inactive' key={i}>
               <div className='attack-name'>{attack.name}</div>
               <div className='icon'><img src={attack.inactiveIcon}/></div>
               <div className='text'>{attack.inactiveDescription}</div>
-            </div> 
+            </div>
           )
         })
 

@@ -74,7 +74,7 @@ async function helloMonster(monster) {
 }
 
 // Does an attack of "damage" to the identifier, returns the state.
-async function attack(target_id, attacker_id, damage) {
+async function attack(target_id, attacker_id, damage, name) {
   console.log(`attack(id=${target_id}, id=${attacker_id}, ${damage})`)
   const response = await fetch(window.GAME_BASE + '/attack', {
     method: 'POST',
@@ -86,7 +86,7 @@ async function attack(target_id, attacker_id, damage) {
       attacker: attacker_id,
       target: target_id,
       damage,
-      attack_name: 'foo',
+      attack_name: name,
     }),
   })
 

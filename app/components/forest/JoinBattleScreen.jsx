@@ -32,7 +32,6 @@ class PlayerMiniCard extends React.Component {
 class JoinBattleScreen extends React.Component {
 
   onJoin() {
-    console.log('joining battle!')
     this.props.setScreen(2)
   }
 
@@ -51,8 +50,6 @@ class JoinBattleScreen extends React.Component {
       playerCardRight = <PlayerMiniCard player={this.props.player2}/>
       forestTitle = 'active battle'
     }
-
-    console.log(this.props.monster)
 
     return (
       <div className='forest-player-container'>
