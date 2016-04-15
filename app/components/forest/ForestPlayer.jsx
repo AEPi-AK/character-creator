@@ -65,12 +65,9 @@ class ForestPlayer extends React.Component {
     this.setState({screen: index})
   }
 
-  checkWin() {
+  async checkWin() {
     let playerVictory = false
     let monsterVictory = false
-
-    console.log('checkwin')
-    console.log(this.localPlayer().hp)
 
     if (this.localPlayer() && this.localPlayer().hp <= 0) {
       console.log('monStervictorty stiting true')
@@ -96,15 +93,14 @@ class ForestPlayer extends React.Component {
       this.setScreen(4)
     }
 
-    // if (this.state.player1) {
-    //   this.state.player1.points += 50
-    //   await updateCharacter(this.state.player1)
-    // }
-    //
-    // if (this.state.player2) {
-    //   this.state.player2.points += 50
-    //   await updateCharacter(this.state.player2)
-    // }
+    if (this.state.player1) {
+      this.state.player1.points += this.state.monster.pointsAwarded
+      await updateCharacter(this.state.player1)
+    }
+
+    if (this.state.player1) {
+      this.state.player1.points += this.state.monster.pointsAwarded
+    }
 
     this.stopPolling()
   }
@@ -164,7 +160,7 @@ class ForestPlayer extends React.Component {
       monster: mfi,
     })
 
-    this.checkWin()
+    await this.checkWin()
   }
 
   async onData(localPlayerId) {

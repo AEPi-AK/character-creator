@@ -64,6 +64,10 @@ class ChooseAttackScreen extends React.Component {
           active = false;
         }
 
+        if (attack.levelThresh > this.props.localPlayer.level) {
+          active = false
+        }
+
         if (active) {
           var typeOfAttack = 'normal'
           if (attack.levelThresh == DRAGONSLAYER_LEVEL) {

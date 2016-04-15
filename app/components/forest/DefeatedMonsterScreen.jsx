@@ -19,7 +19,7 @@ class DefeatedMonsterScreen extends React.Component {
       <div className='container'>
         <div className='defeated-title'>You have slain the beast!</div>
         <div className='defeated-subtitle'>
-          Your character has gained {50} experience points.
+          Your character has gained {this.props.monster.pointsAwarded} experience points.
         </div>
         <div className='character-card-container'>
           <CharacterCard character={this.props.localPlayer}/>
