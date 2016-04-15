@@ -1,4 +1,4 @@
-var gaussian = require('./gaussian/lib/gaussian.js')
+var gaussian = require('./gaussian.js')
 
 const PLAYER_HP_MULTIPLIER = 5
 
