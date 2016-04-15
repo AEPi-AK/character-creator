@@ -1,10 +1,9 @@
 import React from 'react'
+import './YouNeedAccountScreen.less'
 
 class YouNeedAccountScreen extends React.Component {
 
-
   render() {
-
 
     return (
       <div className='need-account-container'>
