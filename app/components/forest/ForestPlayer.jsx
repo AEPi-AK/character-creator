@@ -29,18 +29,18 @@ class ForestPlayer extends React.Component {
       player1: null,
       player2: null,
       monster: null,
+      hasJoined: false,
     }
 
     this.pollTimer = null
-    this.updateFromState = _.debounce(this._updateFromState, POLL_INTERVAL)
 
     this.screens = [
       SplashScanScreen, //  0
       JoinBattleScreen, //  1
       ChooseAttackScreen,// 2
       AttackingScreen,   // 3
-      DefeatedMonsterScreen,
-      PlayerDiedScreen,
+      DefeatedMonsterScreen, // 4
+      PlayerDiedScreen, // 5
     ].map(component => React.createFactory(component))
   }
 
@@ -60,7 +60,44 @@ class ForestPlayer extends React.Component {
     this.setState({screen: index})
   }
 
+  checkWin() {
+    let playerVictory = false
+    let monsterVictory = false
+
+    if (this.state.player1 && !this.state.player2) {
+      if (this.state.player1.hp <= 0) {
+        monsterVictory = true
+      }
+    }
+    else if (this.state.player2 && !this.state.player1) {
+      if (this.state.player2.hp <= 0) {
+        monsterVictory = true
+      }
+    }
+    else {
+      if (this.state.player1.hp <= 0 && this.state.player2.hp <= 0) {
+        monsterVictory = true
+      }
+    }
+
+    if (this.state.monster.hp <= 0) {
+      playerVictory = true
+    }
+
+    if (!(playerVictory || monsterVictory)) {
+      return
+    }
+
+    if (playerVictory) {
+      this.setScreen(4)
+    }
+    else if (monsterVictory) {
+      this.setScreen(5)
+    }
+  }
+
   async hello() {
+    this.setState({hasJoined: false})
     this.stopPolling()
     this.setIsLoading(true)
     this.updateFromState(await helloPlayer(this.localPlayer(), this.state.number))
@@ -75,7 +112,7 @@ class ForestPlayer extends React.Component {
     this.updateFromState(await attack(this.state.monster.id, this.localPlayer().id, dmg, name))
   }
 
-  async _updateFromState(gameState) {
+  async updateFromState(gameState) {
     console.log('updateFromState')
     console.log(gameState)
     let p1 = this.state.player1
@@ -113,6 +150,8 @@ class ForestPlayer extends React.Component {
       player2: p2,
       monster: monsterFromId(gameState.monster.id),
     })
+
+    this.checkWin()
   }
 
   async onData(localPlayerId) {
@@ -140,11 +179,15 @@ class ForestPlayer extends React.Component {
   async resumePolling() {
     this.stopPolling()
     this.pollTimer = setInterval(async () => {
-      // TODO: check if monster has been hit, and display
       const {canAttack, gameState} = await poll(this.localPlayer().id)
       this.updateFromState(gameState)
+
+      if (canAttack && this.state.hasJoined) {
+        this.setScreen(2)
+        setTimeout(() => this.setState({canAttack}), 1000)
+      }
+
       // TODO: enable buttons
-      this.setState({canAttack})
     }, POLL_INTERVAL)
   }
 
@@ -177,6 +220,7 @@ class ForestPlayer extends React.Component {
       monster: this.state.monster,
       onData: this.onData.bind(this),
       attack: this.attack.bind(this),
+      onJoin: () => this.setState({hasJoined: true}),
     }))
 
     return (

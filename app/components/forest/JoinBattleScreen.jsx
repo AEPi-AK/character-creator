@@ -31,14 +31,10 @@ class PlayerMiniCard extends React.Component {
 
 class JoinBattleScreen extends React.Component {
 
-  onJoin() {
-    this.props.setScreen(2)
-  }
-
   render() {
     let forestTitle = 'ready to fight'
-    let playerCardRight = <NoPlayerMiniCard onClick={this.onJoin.bind(this)}/>
-    let playerCardLeft = <NoPlayerMiniCard onClick={this.onJoin.bind(this)}/>
+    let playerCardRight = <NoPlayerMiniCard onClick={this.props.onJoin}/>
+    let playerCardLeft = <NoPlayerMiniCard onClick={this.props.onJoin}/>
 
     // TODO: Put this on the correct side
     if (this.props.player1) {
