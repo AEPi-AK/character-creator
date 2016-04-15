@@ -109,7 +109,7 @@ async function poll(identifier) {
      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      identifier,
+      id: identifier,
     }),
   })
 

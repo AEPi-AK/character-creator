@@ -40,7 +40,7 @@ class ForestMonster extends React.Component {
 
     this.pollTimer = null
     this.gameIsEnding = false
-    this.updateFromState = _.throttle(this._updateFromState, POLL_INTERVAL)
+    // this.updateFromState = _.throttle(this._updateFromState, POLL_INTERVAL)
 
     this.UPDATE_LOCK = true
   }
@@ -95,7 +95,7 @@ class ForestMonster extends React.Component {
     return false
   }
 
-  async _updateFromState(gameState) {
+  async updateFromState(gameState) {
     console.log('updateFromState')
     console.log(gameState)
     let p1 = this.state.player1
@@ -145,7 +145,7 @@ class ForestMonster extends React.Component {
     this.setState({
       monster: newMonster,
     })
-    this.updateFromState(await helloMonster(newMonster))
+    await this.updateFromState(await helloMonster(newMonster))
     this.setIsLoading(false)
     this.resumePolling()
   }

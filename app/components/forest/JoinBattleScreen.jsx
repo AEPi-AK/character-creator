@@ -42,12 +42,13 @@ class JoinBattleScreen extends React.Component {
     let playerCardLeft = <NoPlayerMiniCard onClick={this.onJoin.bind(this)}/>
 
     // TODO: Put this on the correct side
-    console.log(this.props.localPlayer)
-    playerCardLeft = <PlayerMiniCard player={this.props.localPlayer}/>
-    forestTitle = 'active battle'
+    if (this.props.player1) {
+      playerCardLeft = <PlayerMiniCard player={this.props.player1}/>
+      forestTitle = 'active battle'
+    }
 
-    if (this.props.remotePlayer) {
-      playerCardRight = <PlayerMiniCard player={this.props.remotePlayer}/>
+    if (this.props.player2) {
+      playerCardRight = <PlayerMiniCard player={this.props.player2}/>
       forestTitle = 'active battle'
     }
 

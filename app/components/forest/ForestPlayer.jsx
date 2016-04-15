@@ -32,7 +32,7 @@ class ForestPlayer extends React.Component {
     }
 
     this.pollTimer = null
-    this.updateFromState = _.throttle(this._updateFromState, POLL_INTERVAL)
+    this.updateFromState = _.debounce(this._updateFromState, POLL_INTERVAL)
 
     this.screens = [
       SplashScanScreen, //  0
